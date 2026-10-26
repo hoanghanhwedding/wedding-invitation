@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
   <meta charset="UTF-8" />
   <!-- Sender detection: must run before any paint -->
   <script>
-    (function() {
+    (function () {
       var params = new URLSearchParams(window.location.search);
       var sender = (params.get('sender') || 'groom').toLowerCase();
       // Store so the rest of the page can reference it
@@ -24,69 +25,79 @@
   <!-- Google Fonts fallback -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Quicksand:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
 
   <style>
     /* Local Custom Fonts Matching app/layout.tsx */
     @font-face {
       font-family: 'Aquarelle';
       src: url('public/fonts/aquarelle/aquarelle.woff2') format('woff2'),
-           url('public/fonts/aquarelle/aquarelle.woff') format('woff');
+        url('public/fonts/aquarelle/aquarelle.woff') format('woff');
       font-weight: 400;
       font-style: normal;
       font-display: swap;
     }
+
     @font-face {
       font-family: 'Belinda';
       src: url('public/fonts/belinda-avuenue/belinda-avenue.woff2') format('woff2'),
-           url('public/fonts/belinda-avuenue/belinda-avenue.woff') format('woff');
+        url('public/fonts/belinda-avuenue/belinda-avenue.woff') format('woff');
       font-weight: 400;
       font-style: normal;
       font-display: swap;
     }
+
     @font-face {
       font-family: 'Katty';
       src: url('public/fonts/katty-diano/katty-diona.woff2') format('woff2'),
-           url('public/fonts/katty-diano/katty-diona.woff') format('woff');
+        url('public/fonts/katty-diano/katty-diona.woff') format('woff');
       font-weight: 400;
       font-style: normal;
       font-display: swap;
     }
+
     @font-face {
       font-family: 'MadamGhea';
       src: url('public/fonts/madam-ghea/madam-ghea.woff2') format('woff2'),
-           url('public/fonts/madam-ghea/madam-ghea.woff') format('woff');
+        url('public/fonts/madam-ghea/madam-ghea.woff') format('woff');
       font-weight: 400;
       font-style: normal;
       font-display: swap;
     }
+
     @font-face {
       font-family: 'Mallong';
       src: url('public/fonts/mallong/mallong.woff2') format('woff2'),
-           url('public/fonts/mallong/mallong.woff') format('woff');
+        url('public/fonts/mallong/mallong.woff') format('woff');
       font-weight: 400;
       font-style: normal;
       font-display: swap;
     }
+
     @font-face {
       font-family: 'ShowcaseSans';
       src: url('public/fonts/showcasesans/showcasesans.woff2') format('woff2'),
-           url('public/fonts/showcasesans/showcasesans.woff') format('woff');
+        url('public/fonts/showcasesans/showcasesans.woff') format('woff');
       font-weight: 400;
       font-style: normal;
       font-display: swap;
     }
+
     @font-face {
       font-family: 'Signora';
       src: url('public/fonts/signora/signora.woff2') format('woff2'),
-           url('public/fonts/signora/signora.woff') format('woff');
+        url('public/fonts/signora/signora.woff') format('woff');
       font-weight: 400;
       font-style: normal;
       font-display: swap;
     }
 
     /* Reset & Base */
-    *, *::before, *::after {
+    *,
+    *::before,
+    *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
@@ -142,12 +153,15 @@
       touch-action: manipulation !important;
       transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
     }
+
     .audio-button:hover {
       transform: scale(1.1) !important;
     }
+
     .audio-button:active {
       transform: scale(0.95) !important;
     }
+
     .audio-btn-inner {
       position: relative;
       width: 100%;
@@ -155,6 +169,7 @@
       border-radius: 9999px;
       overflow: hidden;
     }
+
     .audio-btn-img {
       width: 100%;
       height: 100%;
@@ -163,13 +178,21 @@
       transition: transform 1s ease;
       display: block;
     }
+
     .audio-btn-img.spinning {
       animation: spin 2s linear infinite;
     }
+
     @keyframes spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
     }
+
     .audio-slash-overlay {
       position: absolute;
       inset: 0;
@@ -178,6 +201,7 @@
       justify-content: center;
       pointer-events: none;
     }
+
     .audio-slash-line {
       width: 100%;
       height: 2px;
@@ -204,15 +228,19 @@
       transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
       will-change: opacity, transform;
     }
+
     .anim.from-up {
       transform: translateY(30px);
     }
+
     .anim.from-right {
       transform: translateX(30px);
     }
+
     .anim.from-left {
       transform: translateX(-30px);
     }
+
     .anim.visible {
       opacity: 1;
       transform: translate(0, 0);
@@ -235,6 +263,7 @@
       align-items: center;
       overflow: hidden;
     }
+
     .envelope-top-bar {
       font-family: var(--font-showcase);
       display: flex;
@@ -242,12 +271,15 @@
       width: 100%;
       padding: 8px 12px;
     }
+
     .envelope-top-bar span {
       color: #000000;
     }
+
     .flower-1-img {
       position: absolute;
-      left: -2rem; /* -left-8 */
+      left: -2rem;
+      /* -left-8 */
       top: 12rem;
       transform: translateY(-50%) rotate(35deg);
       width: 100px;
@@ -255,6 +287,7 @@
       pointer-events: none;
       z-index: 10;
     }
+
     .envelope-heading {
       font-family: var(--font-katty);
       color: #000000;
@@ -264,10 +297,12 @@
       line-height: 1.15;
       pointer-events: none;
       word-break: break-word;
-      text-shadow: 0 0 2px rgba(0,0,0,0);
+      text-shadow: 0 0 2px rgba(0, 0, 0, 0);
     }
+
     .tap-hint {
-      margin-top: 4rem; /* mt-16 */
+      margin-top: 4rem;
+      /* mt-16 */
       height: auto;
       width: 100%;
       min-width: 20px;
@@ -277,7 +312,7 @@
       text-align: center;
       line-height: normal;
       font-family: var(--font-mallong);
-      text-shadow: 0 0 2px rgba(0,0,0,0);
+      text-shadow: 0 0 2px rgba(0, 0, 0, 0);
       cursor: pointer;
       user-select: none;
     }
@@ -288,6 +323,7 @@
       max-height: 380px;
       margin: 8px auto 0 auto;
     }
+
     .envelope-box {
       position: relative;
       width: 280px;
@@ -301,9 +337,17 @@
       animation: float 3s ease-in-out infinite;
       perspective: 800px;
     }
+
     @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
     }
 
     /* Front Flap */
@@ -321,11 +365,13 @@
       transition: all 0.4s ease-in-out;
       z-index: 40;
     }
+
     .envelope-box.is-open .env-flap {
       transform: rotateX(180deg);
       transition-delay: 0s;
       z-index: 10;
     }
+
     .envelope-box:not(.is-open) .env-flap {
       transform: rotateX(0deg);
       transition-delay: 0.6s;
@@ -363,25 +409,29 @@
       transition: all 0.4s ease-in-out;
       z-index: 10;
     }
+
     .envelope-box.is-open .env-letter {
       transform: translateY(-90px);
       transition-delay: 0.6s;
       z-index: 20;
     }
+
     .envelope-box:not(.is-open) .env-letter {
       transform: translateY(0);
       transition-delay: 0s;
       z-index: 10;
     }
+
     .env-letter-gradient {
       position: absolute;
       inset: 0;
       pointer-events: none;
-      background: linear-gradient(to bottom, transparent, rgba(255,227,239,0.7), rgba(215,227,239,1));
+      background: linear-gradient(to bottom, transparent, rgba(255, 227, 239, 0.7), rgba(215, 227, 239, 1));
       background-position: 0 25%;
       background-size: 100% 300%;
       z-index: 5;
     }
+
     .env-letter-img-wrap {
       position: absolute;
       top: 0;
@@ -393,11 +443,17 @@
       border-top-right-radius: 6px;
       z-index: 10;
     }
+
     .env-letter-img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center -16px;
       display: block;
+      image-rendering: auto;
+      transform: translateZ(0);
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
     }
 
     /* Wax Seal */
@@ -410,6 +466,7 @@
       width: 30px;
       height: 30px;
     }
+
     .env-wax-seal img {
       object-fit: contain;
       width: 100%;
@@ -417,6 +474,7 @@
       cursor: pointer;
       transition: transform 0.2s ease;
     }
+
     .env-wax-seal img:hover {
       transform: scale(1.1);
     }
@@ -430,45 +488,69 @@
       z-index: 20;
       pointer-events: none;
     }
+
     .env-heart-unit {
       position: absolute;
       bottom: 0;
       opacity: 0;
       transition: opacity 0.3s;
     }
+
     .env-heart-unit.h1 {
       left: 20%;
       transform: scale(0.3);
     }
+
     .envelope-box.is-open .env-heart-unit.h1 {
       opacity: 1;
       animation: heartFly 6s linear 1 0.7s forwards, heartSway 2s ease-in-out 4 0.7s alternate forwards;
     }
+
     .env-heart-unit.h2 {
       left: 55%;
       transform: scale(0.4);
     }
+
     .envelope-box.is-open .env-heart-unit.h2 {
       opacity: 1;
       animation: heartFly 7s linear 1 0.7s forwards, heartSway 4s ease-in-out 2 0.7s alternate forwards;
     }
+
     .env-heart-unit.h3 {
       left: 10%;
       transform: scale(0.35);
     }
+
     .envelope-box.is-open .env-heart-unit.h3 {
       opacity: 1;
       animation: heartFly 8s linear 1 0.7s forwards, heartSway 2s ease-in-out 6 0.7s alternate forwards;
     }
 
     @keyframes heartFly {
-      0% { top: 0; opacity: 1; }
-      90% { top: -500px; opacity: 0.7; }
-      100% { top: -600px; opacity: 0; }
+      0% {
+        top: 0;
+        opacity: 1;
+      }
+
+      90% {
+        top: -500px;
+        opacity: 0.7;
+      }
+
+      100% {
+        top: -600px;
+        opacity: 0;
+      }
     }
+
     @keyframes heartSway {
-      0% { margin-left: 0px; }
-      100% { margin-left: 50px; }
+      0% {
+        margin-left: 0px;
+      }
+
+      100% {
+        margin-left: 50px;
+      }
     }
 
     /* Envelope Shadow Overlay */
@@ -482,17 +564,21 @@
       animation: envelopeShadow 3s ease-in-out infinite;
       pointer-events: none;
       z-index: 10;
-      background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0) 100%);
+      background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0) 100%);
       filter: blur(3px);
       opacity: 0.7;
     }
+
     @keyframes envelopeShadow {
-      0%, 100% {
+
+      0%,
+      100% {
         width: 140%;
         opacity: 0.5;
         left: 50%;
         transform: translateX(-50%);
       }
+
       50% {
         width: 100%;
         opacity: 0.2;
@@ -514,18 +600,23 @@
       font-family: var(--font-mallong);
       display: block;
     }
+
     .flower-2-img {
       position: absolute;
-      right: -2rem; /* -right-8 */
-      bottom: 5rem; /* bottom-20 */
+      right: -2rem;
+      /* -right-8 */
+      bottom: 5rem;
+      /* bottom-20 */
       transform: translateY(50%) rotate(-90deg);
       width: 100px;
       height: auto;
       pointer-events: none;
       z-index: 10;
     }
+
     .invite-family-desc {
-      margin-top: 2.5rem; /* mt-10 */
+      margin-top: 2.5rem;
+      /* mt-10 */
       height: auto;
       width: 100%;
       min-width: 20px;
@@ -536,7 +627,7 @@
       line-height: 1.33;
       text-transform: uppercase;
       font-family: var(--font-mallong);
-      text-shadow: 0 0 2px rgba(0,0,0,0);
+      text-shadow: 0 0 2px rgba(0, 0, 0, 0);
       padding: 0 8px;
     }
 
@@ -557,6 +648,7 @@
       overflow: hidden;
       background: linear-gradient(to bottom, #ffffff, #f9fafb);
     }
+
     .time-title {
       height: auto;
       width: 100%;
@@ -567,8 +659,9 @@
       text-align: center;
       line-height: 1.59;
       font-family: var(--font-signora);
-      text-shadow: 0 0 2px rgba(0,0,0,0);
+      text-shadow: 0 0 2px rgba(0, 0, 0, 0);
     }
+
     .time-lunar {
       height: auto;
       width: 100%;
@@ -579,14 +672,16 @@
       text-align: center;
       line-height: normal;
       font-family: var(--font-signora);
-      text-shadow: 0 0 2px rgba(0,0,0,0);
+      text-shadow: 0 0 2px rgba(0, 0, 0, 0);
     }
+
     .divider-wrap {
       display: flex;
       justify-content: center;
       align-items: center;
       margin: 4px 0;
     }
+
     .ceremony-badge {
       height: auto;
       width: 100%;
@@ -598,20 +693,25 @@
       line-height: 1.33;
       text-transform: uppercase;
       font-family: var(--font-mallong);
-      text-shadow: 0 0 2px rgba(0,0,0,0);
+      text-shadow: 0 0 2px rgba(0, 0, 0, 0);
     }
+
     .location-card {
       border: 2px dashed var(--gold-950);
       display: flex;
       justify-content: center;
       flex-direction: column;
       align-items: center;
-      margin-top: 1.25rem; /* mt-5 */
+      margin-top: 1.25rem;
+      /* mt-5 */
       width: 100%;
-      border-radius: 0.5rem; /* rounded-lg */
-      padding: 0.5rem; /* p-2 */
+      border-radius: 0.5rem;
+      /* rounded-lg */
+      padding: 0.5rem;
+      /* p-2 */
       background: #ffffff;
     }
+
     .location-card-title {
       height: auto;
       width: 100%;
@@ -622,8 +722,9 @@
       text-align: center;
       line-height: 1.22;
       font-family: var(--font-signora);
-      text-shadow: 0 0 2px rgba(0,0,0,0);
+      text-shadow: 0 0 2px rgba(0, 0, 0, 0);
     }
+
     .location-addr {
       display: flex;
       flex-direction: column;
@@ -636,13 +737,17 @@
       text-align: center;
       line-height: normal;
       font-family: var(--font-signora);
-      text-shadow: 0 0 2px rgba(0,0,0,0);
+      text-shadow: 0 0 2px rgba(0, 0, 0, 0);
     }
+
     .map-frame-container {
       width: 100%;
-      margin-top: 1rem; /* mt-4 */
-      margin-bottom: 1.5rem; /* mb-6 */
+      margin-top: 1rem;
+      /* mt-4 */
+      margin-bottom: 1.5rem;
+      /* mb-6 */
     }
+
     .map-frame-container iframe {
       width: 100%;
       height: 250px;
@@ -651,6 +756,7 @@
       box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
       display: block;
     }
+
     .map-anchor {
       font-family: var(--font-mallong);
       color: #000000;
@@ -659,10 +765,12 @@
       text-align: center;
       word-break: break-all;
     }
+
     .invitation-letter-note {
       height: auto;
       width: 100%;
-      padding-top: 2.5rem; /* py-10 */
+      padding-top: 2.5rem;
+      /* py-10 */
       padding-bottom: 2.5rem;
       min-width: 20px;
       color: #000000;
@@ -671,7 +779,7 @@
       text-align: center;
       line-height: 1.6;
       font-family: var(--font-signora);
-      text-shadow: 0 0 2px rgba(0,0,0,0);
+      text-shadow: 0 0 2px rgba(0, 0, 0, 0);
       letter-spacing: 2px;
     }
 
@@ -692,11 +800,13 @@
       align-items: center;
       overflow: hidden;
     }
+
     .quote-top-bar {
       display: flex;
       justify-content: space-between;
       width: 100%;
     }
+
     .quote-top-bar span {
       height: auto;
       width: 100%;
@@ -707,22 +817,26 @@
       text-align: center;
       line-height: normal;
       font-family: var(--font-showcase);
-      text-shadow: 0 0 2px rgba(0,0,0,0);
+      text-shadow: 0 0 2px rgba(0, 0, 0, 0);
     }
+
     .quote-img-wrap {
       width: 100%;
       position: relative;
       height: 650px;
-      border-radius: 0.5rem; /* rounded-lg */
+      border-radius: 0.5rem;
+      /* rounded-lg */
       overflow: hidden;
       box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
     }
+
     .quote-img-wrap img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
     }
+
     .quote-caption-bottom {
       height: auto;
       width: 100%;
@@ -733,8 +847,9 @@
       text-align: center;
       line-height: normal;
       font-family: var(--font-quicksand);
-      padding-top: 0.5rem; /* pt-2 */
-      text-shadow: 0 0 2px rgba(0,0,0,0);
+      padding-top: 0.5rem;
+      /* pt-2 */
+      text-shadow: 0 0 2px rgba(0, 0, 0, 0);
     }
 
     /* ============================================================
@@ -753,9 +868,11 @@
       align-items: center;
       overflow: hidden;
     }
+
     .actor-thanks-text {
       display: flex;
-      padding-top: 2.5rem; /* py-10 */
+      padding-top: 2.5rem;
+      /* py-10 */
       padding-bottom: 2.5rem;
       flex-direction: column;
       height: auto;
@@ -767,22 +884,27 @@
       text-align: center;
       line-height: 1.45;
       font-family: var(--font-quicksand);
-      text-shadow: 0 0 2px rgba(0,0,0,0);
+      text-shadow: 0 0 2px rgba(0, 0, 0, 0);
     }
+
     .heart-component-wrap {
       display: flex;
       justify-content: center;
       align-items: center;
     }
+
     .my-lover-img-wrap {
-      margin-top: 2.5rem; /* mt-10 */
+      margin-top: 2.5rem;
+      /* mt-10 */
     }
+
     .my-lover-img-wrap img {
       object-fit: cover;
       width: 250px;
       height: 50px;
       display: block;
     }
+
     .couple-actors-row {
       display: flex;
       justify-content: space-around;
@@ -795,35 +917,44 @@
       text-align: center;
       line-height: normal;
       font-family: var(--font-mallong);
-      text-shadow: 0 0 2px rgba(0,0,0,0);
+      text-shadow: 0 0 2px rgba(0, 0, 0, 0);
     }
+
     .actor-col {
       display: flex;
       flex-direction: column;
-      gap: 0.75rem; /* gap-3 */
+      gap: 0.75rem;
+      /* gap-3 */
       width: 50%;
       align-items: center;
     }
+
     .actor-col img {
       object-fit: cover;
-      margin-top: 2.5rem; /* mt-10 */
+      margin-top: 2.5rem;
+      /* mt-10 */
       width: 168px;
       height: 240px;
       display: block;
       border-radius: 4px;
     }
+
     .actor-col a {
       color: inherit;
       text-decoration: none;
       transition: color 0.2s;
       cursor: pointer;
     }
+
     .actor-col a:hover {
-      color: #db2777; /* hover:text-pink-600 */
+      color: #db2777;
+      /* hover:text-pink-600 */
     }
+
     .actor-sky-poem {
       display: flex;
-      padding-top: 2.5rem; /* py-10 */
+      padding-top: 2.5rem;
+      /* py-10 */
       padding-bottom: 2.5rem;
       flex-direction: column;
       height: auto;
@@ -835,13 +966,15 @@
       text-align: center;
       line-height: 1.45;
       font-family: var(--font-quicksand);
-      text-shadow: 0 0 2px rgba(0,0,0,0);
+      text-shadow: 0 0 2px rgba(0, 0, 0, 0);
     }
+
     .welcome-to-wedding-row {
       display: flex;
       justify-content: space-between;
       width: 100%;
     }
+
     .welcome-to-wedding-row span {
       height: auto;
       width: 100%;
@@ -852,7 +985,7 @@
       text-align: center;
       line-height: normal;
       font-family: var(--font-showcase);
-      text-shadow: 0 0 2px rgba(0,0,0,0);
+      text-shadow: 0 0 2px rgba(0, 0, 0, 0);
     }
 
     /* Album Layout - Exact CSS from SectionActor.tsx */
@@ -862,6 +995,7 @@
       position: relative;
       width: 100%;
     }
+
     .album-layout-bg {
       position: absolute;
       inset: 0;
@@ -870,54 +1004,67 @@
       object-fit: cover;
       display: block;
     }
+
     .album-pic-item {
       position: absolute;
       left: 26px;
     }
+
     @media (min-width: 768px) {
       .album-pic-item {
         left: 45px;
       }
     }
+
     .album-pic-item.item-top {
-      top: -1rem; /* -top-4 */
+      top: -1rem;
+      /* -top-4 */
     }
+
     .album-pic-item.item-mid {
       top: 250px;
     }
+
     .album-pic-item.item-bot {
       top: 518px;
     }
+
     .album-pic-item img {
       object-fit: cover;
-      margin-top: 2.5rem; /* mt-10 */
+      margin-top: 2.5rem;
+      /* mt-10 */
       width: 380px;
       height: 260px;
       display: block;
       border-radius: 4px;
     }
+
     .album-pic-item.item-top img {
       object-position: 25% 25%;
     }
+
     .album-pic-item.item-mid img {
-      object-position: 25% 85%;
+      object-position: 25% 10%;
     }
+
     .album-pic-item.item-bot img {
-      object-position: 15% 0%;
+      object-position: 15% 15%;
     }
+
     .album-pic-caption {
       height: auto;
       width: 100%;
       min-width: 20px;
       position: absolute;
-      bottom: 0.5rem; /* bottom-2 */
+      bottom: 0.5rem;
+      /* bottom-2 */
       color: #ffffff;
       font-size: 14.976px;
       font-weight: 500;
       text-align: center;
       line-height: normal;
       font-family: var(--font-quicksand);
-      text-shadow: 0 0 2px rgba(0,0,0,0);
+      text-shadow: 0 0 2px rgba(0, 0, 0, 0);
       pointer-events: none;
     }
 
@@ -925,60 +1072,77 @@
     .countdown-section-wrap {
       width: 100%;
       height: 200px;
-      padding: 1.5rem 1rem; /* px-4 py-6 */
+      padding: 1.5rem 1rem;
+      /* px-4 py-6 */
       display: flex;
       align-items: center;
       justify-content: center;
       background: linear-gradient(to bottom, #ffffff, #f9fafb);
     }
+
     .countdown-inner-box {
       width: 100%;
-      max-width: 28rem; /* max-w-md */
+      max-width: 28rem;
+      /* max-w-md */
     }
+
     .countdown-heading {
       text-align: center;
       color: var(--gold);
       font-size: 20px;
       font-weight: 500;
-      margin-bottom: 1.5rem; /* mb-6 */
+      margin-bottom: 1.5rem;
+      /* mb-6 */
       font-family: var(--font-signora);
     }
+
     .countdown-grid-4 {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 1rem; /* gap-4 */
+      gap: 1rem;
+      /* gap-4 */
     }
+
     .countdown-unit-card {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       background-color: #ffffff;
-      border-radius: 0.5rem; /* rounded-lg */
+      border-radius: 0.5rem;
+      /* rounded-lg */
       box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
       border: 1px solid #f3f4f6;
-      padding: 0.75rem; /* p-3 */
+      padding: 0.75rem;
+      /* p-3 */
       min-height: 80px;
     }
+
     .countdown-val-num {
       color: var(--gold);
       font-size: 24px;
       font-weight: 700;
       font-family: var(--font-showcase);
-      margin-bottom: 0.25rem; /* mb-1 */
+      margin-bottom: 0.25rem;
+      /* mb-1 */
     }
+
     .countdown-lbl-text {
       color: #000000;
       font-size: 12px;
       font-weight: 500;
       font-family: var(--font-mallong);
       text-transform: uppercase;
-      letter-spacing: 0.025em; /* tracking-wide */
+      letter-spacing: 0.025em;
+      /* tracking-wide */
     }
+
     .countdown-target-date {
       text-align: center;
-      margin-top: 1rem; /* mt-4 */
-      color: #4b5563; /* text-gray-600 */
+      margin-top: 1rem;
+      /* mt-4 */
+      color: #4b5563;
+      /* text-gray-600 */
       font-size: 14px;
       font-family: var(--font-signora);
     }
@@ -990,21 +1154,25 @@
       position: relative;
       margin: 0 auto;
       width: 100%;
-      padding: 2.5rem; /* px-10 py-10 */
+      padding: 2.5rem;
+      /* px-10 py-10 */
       height: fit-content;
       min-width: 20px;
       display: flex;
       flex-direction: column;
-      gap: 2.5rem; /* gap-10 */
+      gap: 2.5rem;
+      /* gap-10 */
       align-items: center;
       overflow: hidden;
       background-color: #ffffff;
     }
+
     .save-the-date-img-wrap img {
       width: 200px;
       height: auto;
       display: block;
     }
+
     .date-two-lines {
       height: auto;
       width: 100%;
@@ -1017,7 +1185,7 @@
       text-align: center;
       line-height: normal;
       font-family: var(--font-quicksand);
-      text-shadow: 0 0 2px rgba(0,0,0,0);
+      text-shadow: 0 0 2px rgba(0, 0, 0, 0);
     }
 
     /* ============================================================
@@ -1034,14 +1202,17 @@
       align-items: center;
       overflow: hidden;
     }
+
     .save-card-deco-img {
       width: 408px;
       height: auto;
       margin: 0 auto;
-      padding-top: 2.5rem; /* py-10 */
+      padding-top: 2.5rem;
+      /* py-10 */
       padding-bottom: 2.5rem;
       display: block;
     }
+
     .save-dark-gradient-overlay {
       position: absolute;
       z-index: 100;
@@ -1049,7 +1220,7 @@
       margin: auto;
       padding-top: 2.5rem;
       padding-bottom: 2.5rem;
-      background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.6), rgba(0,0,0,0.9));
+      background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.9));
       top: 200px;
       left: 0;
       right: 0;
@@ -1057,6 +1228,7 @@
       height: 225px;
       pointer-events: none;
     }
+
     .save-main-photo {
       width: 358px;
       z-index: 8;
@@ -1064,7 +1236,8 @@
       object-fit: cover;
       object-position: center;
       margin: auto;
-      padding-top: 2.5rem; /* pt-10 */
+      padding-top: 2.5rem;
+      /* pt-10 */
       position: absolute;
       top: -125px;
       left: 0;
@@ -1072,6 +1245,7 @@
       bottom: 0;
       display: block;
     }
+
     .save-date-bottom-text {
       display: flex;
       flex-direction: column;
@@ -1087,10 +1261,11 @@
       text-align: center;
       line-height: 1.52;
       font-family: var(--font-madam);
-      text-shadow: 0 0 2px rgba(0,0,0,0);
+      text-shadow: 0 0 2px rgba(0, 0, 0, 0);
       z-index: 102;
       pointer-events: none;
     }
+
     .dateboard-container {
       position: absolute;
       left: 75px;
@@ -1098,39 +1273,50 @@
       z-index: 101;
       color: #ffffff;
     }
+
     .dateboard-inner {
       width: 300px;
       margin: 0 auto;
     }
+
     .dateboard-grid {
       position: relative;
       display: grid;
       grid-template-columns: repeat(7, minmax(0, 1fr));
     }
+
     .date-cell {
       position: relative;
-      width: 2rem; /* w-8 */
-      height: 2rem; /* h-8 */
+      width: 2rem;
+      /* w-8 */
+      height: 2rem;
+      /* h-8 */
       display: flex;
       align-items: center;
       justify-content: center;
       transition: all 0.3s;
       font-weight: 500;
-      font-size: 0.875rem; /* text-sm */
+      font-size: 0.875rem;
+      /* text-sm */
       font-family: var(--font-quicksand);
       color: #ffffff;
     }
+
     .date-cell.empty {
       visibility: hidden;
     }
+
     .date-cell.special-reception {
       color: var(--gold);
       transform: scale(1.1);
     }
+
     .date-cell.special-ceremony {
-      color: #ef4444; /* text-red-500 */
+      color: #ef4444;
+      /* text-red-500 */
       transform: scale(1.1);
     }
+
     .date-cell-inner {
       position: relative;
       width: 400px;
@@ -1138,6 +1324,7 @@
       align-items: center;
       justify-content: center;
     }
+
     .date-group-box {
       position: relative;
       display: flex;
@@ -1145,6 +1332,7 @@
       align-items: center;
       cursor: pointer;
     }
+
     .date-num-badge {
       padding-left: 0.5rem;
       padding-right: 0.5rem;
@@ -1152,24 +1340,30 @@
       transition: all 0.3s;
       border-radius: 0.5rem;
     }
+
     .date-heart-svg {
       width: 10px;
       height: 9px;
       position: absolute;
-      top: 1.5rem; /* top-6 */
+      top: 1.5rem;
+      /* top-6 */
       transition: all 0.3s;
     }
+
     .date-heart-svg.gold {
       color: var(--gold);
       fill: var(--gold);
     }
+
     .date-heart-svg.red {
       color: #ef4444;
       fill: #ef4444;
     }
+
     .date-tooltip {
       position: absolute;
-      top: -2.5rem; /* -top-10 */
+      top: -2.5rem;
+      /* -top-10 */
       left: 50%;
       transform: translateX(-50%);
       opacity: 0;
@@ -1177,25 +1371,31 @@
       pointer-events: none;
       z-index: 10;
     }
+
     .date-group-box:hover .date-tooltip {
       opacity: 1;
     }
+
     .date-tooltip-inner {
       color: #ffffff;
       padding: 0.25rem 0.75rem;
       border-radius: 0.5rem;
-      font-size: 0.75rem; /* text-xs */
+      font-size: 0.75rem;
+      /* text-xs */
       font-weight: 700;
       white-space: nowrap;
       box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
       position: relative;
     }
+
     .date-tooltip-inner.gold {
       background-color: var(--gold);
     }
+
     .date-tooltip-inner.red {
       background-color: #ef4444;
     }
+
     .date-tooltip-arrow {
       position: absolute;
       top: 100%;
@@ -1206,9 +1406,11 @@
       border-left: 4px solid transparent;
       border-right: 4px solid transparent;
     }
+
     .date-tooltip-arrow.gold {
       border-top: 4px solid var(--gold);
     }
+
     .date-tooltip-arrow.red {
       border-top: 4px solid #ef4444;
     }
@@ -1230,6 +1432,7 @@
       align-items: center;
       overflow: hidden;
     }
+
     .section-bottom-text {
       display: flex;
       flex-direction: column;
@@ -1242,11 +1445,13 @@
       text-align: center;
       line-height: normal;
       font-family: var(--font-mallong);
-      text-shadow: 0 0 2px rgba(0,0,0,0);
+      text-shadow: 0 0 2px rgba(0, 0, 0, 0);
     }
+
     .section-bottom1-wrap {
       background-color: #ffffff;
-      padding-top: 2.5rem; /* pt-10 */
+      padding-top: 2.5rem;
+      /* pt-10 */
       position: relative;
       margin: 0 auto;
       width: 100%;
@@ -1259,6 +1464,7 @@
       align-items: center;
       overflow: hidden;
     }
+
     .section-bottom1-text {
       display: flex;
       flex-direction: column;
@@ -1271,7 +1477,7 @@
       text-align: center;
       line-height: normal;
       font-family: var(--font-mallong);
-      text-shadow: 0 0 2px rgba(0,0,0,0);
+      text-shadow: 0 0 2px rgba(0, 0, 0, 0);
     }
 
     /* ============================================================
@@ -1279,7 +1485,8 @@
        ============================================================ */
     .section-sweet-wrap {
       position: relative;
-      margin-top: 2.5rem; /* mt-10 */
+      margin-top: 2.5rem;
+      /* mt-10 */
       margin-left: auto;
       margin-right: auto;
       width: 100%;
@@ -1291,14 +1498,17 @@
       align-items: center;
       overflow: hidden;
     }
+
     .sweet-header-labels {
       display: flex;
       justify-content: space-between;
       width: 100%;
       position: absolute;
-      top: 0.75rem; /* top-3 */
+      top: 0.75rem;
+      /* top-3 */
       z-index: 10;
     }
+
     .sweet-header-labels span {
       height: auto;
       width: 100%;
@@ -1309,8 +1519,9 @@
       text-align: center;
       line-height: normal;
       font-family: var(--font-showcase);
-      text-shadow: 0 0 2px rgba(0,0,0,0);
+      text-shadow: 0 0 2px rgba(0, 0, 0, 0);
     }
+
     .sweet-full-img-box {
       width: 100%;
       position: relative;
@@ -1318,6 +1529,7 @@
       overflow: hidden;
       box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
     }
+
     .sweet-full-img-box img {
       width: 100%;
       height: 100%;
@@ -1333,7 +1545,8 @@
       margin: 0 auto;
       width: 100%;
       background-color: #ffffff;
-      padding-top: 2.5rem; /* pt-10 */
+      padding-top: 2.5rem;
+      /* pt-10 */
       height: fit-content;
       min-width: 20px;
       display: flex;
@@ -1341,35 +1554,47 @@
       align-items: center;
       overflow: hidden;
     }
+
     .rsvp-present-img-box {
-      margin: 2.5rem 0; /* my-10 */
+      margin: 2.5rem 0;
+      /* my-10 */
     }
+
     .rsvp-present-img-box img {
       width: 100px;
       height: 100px;
       object-fit: cover;
       display: block;
     }
+
     .rsvp-qr-cards-container {
       width: 100%;
-      max-width: 28rem; /* max-w-md */
+      max-width: 28rem;
+      /* max-w-md */
       display: flex;
       flex-direction: column;
-      gap: 1.5rem; /* space-y-6 */
-      margin-top: 2rem; /* mt-8 */
+      gap: 1.5rem;
+      /* space-y-6 */
+      margin-top: 2rem;
+      /* mt-8 */
     }
+
     .rsvp-qr-block {
-      border: 2px solid #d1d5db; /* border-gray-300 */
+      border: 2px solid #d1d5db;
+      /* border-gray-300 */
       width: 350px;
       height: 350px;
       margin: 0 auto;
-      border-radius: 0.5rem; /* rounded-lg */
-      padding: 1.5rem; /* p-6 */
+      border-radius: 0.5rem;
+      /* rounded-lg */
+      padding: 1.5rem;
+      /* p-6 */
       display: flex;
       flex-direction: column;
       align-items: center;
       background-color: #ffffff;
     }
+
     .rsvp-qr-block-title {
       height: auto;
       width: 100%;
@@ -1382,27 +1607,36 @@
       text-align: center;
       line-height: normal;
       font-family: var(--font-quicksand);
-      padding-bottom: 0.5rem; /* pb-2 */
-      text-shadow: 0 0 2px rgba(0,0,0,0);
+      padding-bottom: 0.5rem;
+      /* pb-2 */
+      text-shadow: 0 0 2px rgba(0, 0, 0, 0);
     }
+
     .rsvp-qr-img-wrapper {
       position: relative;
-      width: 12rem; /* w-48 */
-      height: 12rem; /* h-48 */
-      margin-bottom: 1rem; /* mb-4 */
+      width: 12rem;
+      /* w-48 */
+      height: 12rem;
+      /* h-48 */
+      margin-bottom: 1rem;
+      /* mb-4 */
     }
+
     .rsvp-qr-img-wrapper img {
       width: 100%;
       height: 100%;
       object-fit: contain;
       display: block;
     }
+
     .rsvp-qr-info {
       text-align: center;
       display: flex;
       flex-direction: column;
-      gap: 0.5rem; /* space-y-2 */
+      gap: 0.5rem;
+      /* space-y-2 */
     }
+
     .rsvp-qr-info p {
       color: #000000;
       font-size: 12.848px;
@@ -1410,84 +1644,109 @@
       text-align: center;
       line-height: normal;
       font-family: var(--font-quicksand);
-      text-shadow: 0 0 2px rgba(0,0,0,0);
+      text-shadow: 0 0 2px rgba(0, 0, 0, 0);
     }
 
     /* RSVP Form Card */
     .rsvp-form-container {
       width: 350px;
       max-width: 28rem;
-      margin: 2.5rem auto; /* my-10 */
+      margin: 2.5rem auto;
+      /* my-10 */
     }
+
     .rsvp-form-card {
       border: 2px solid #d1d5db;
       border-radius: 0.5rem;
-      padding: 2rem; /* p-8 */
+      padding: 2rem;
+      /* p-8 */
       background-color: #ffffff;
       box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
     }
+
     .rsvp-form-title {
-      font-size: 1.5rem; /* text-2xl */
+      font-size: 1.5rem;
+      /* text-2xl */
       font-weight: 700;
       text-align: center;
-      margin-bottom: 1.5rem; /* mb-6 */
-      color: #1f2937; /* text-gray-800 */
+      margin-bottom: 1.5rem;
+      /* mb-6 */
+      color: #1f2937;
+      /* text-gray-800 */
       font-family: var(--font-quicksand);
     }
+
     .form-field-group {
-      margin-bottom: 1.5rem; /* space-y-6 */
+      margin-bottom: 1.5rem;
+      /* space-y-6 */
       display: flex;
       flex-direction: column;
       gap: 0.5rem;
     }
+
     .form-field-label {
       display: block;
-      font-size: 0.875rem; /* text-sm */
+      font-size: 0.875rem;
+      /* text-sm */
       font-weight: 600;
-      color: #374151; /* text-gray-700 */
+      color: #374151;
+      /* text-gray-700 */
       font-family: var(--font-quicksand);
     }
+
     .form-required-star {
-      color: #ef4444; /* text-red-500 */
+      color: #ef4444;
+      /* text-red-500 */
     }
+
     .form-text-input {
       width: 100%;
-      padding: 0.75rem 1rem; /* px-4 py-3 */
+      padding: 0.75rem 1rem;
+      /* px-4 py-3 */
       border: 2px solid #d1d5db;
       border-radius: 0.5rem;
       outline: none;
       font-family: var(--font-quicksand);
       transition: all 0.2s;
     }
+
     .form-text-input:focus {
       border-color: #f472b6;
       box-shadow: 0 0 0 2px rgba(244, 114, 182, 0.5);
     }
+
     .form-radio-card {
       display: flex;
       align-items: center;
-      padding: 0.75rem; /* p-3 */
+      padding: 0.75rem;
+      /* p-3 */
       border: 2px solid #d1d5db;
       border-radius: 0.5rem;
       cursor: pointer;
       transition: background-color 0.2s;
     }
+
     .form-radio-card:hover {
-      background-color: #fdf2f8; /* hover:bg-pink-50 */
+      background-color: #fdf2f8;
+      /* hover:bg-pink-50 */
     }
+
     .form-radio-card input {
       width: 1.25rem;
       height: 1.25rem;
       accent-color: #ec4899;
     }
+
     .form-radio-card span {
       margin-left: 0.75rem;
       color: #374151;
       font-family: var(--font-quicksand);
     }
+
     .rsvp-submit-btn {
       width: 100%;
-      padding: 1rem 0; /* py-4 */
+      padding: 1rem 0;
+      /* py-4 */
       background-color: #baa58a;
       color: #ffffff;
       font-weight: 600;
@@ -1495,33 +1754,42 @@
       box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
       border: none;
       font-family: var(--font-quicksand);
-      font-size: 1.125rem; /* text-lg */
+      font-size: 1.125rem;
+      /* text-lg */
       cursor: pointer;
       transition: all 0.2s;
     }
+
     .rsvp-submit-btn:hover {
       box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
       transform: scale(1.02);
     }
+
     .rsvp-submit-btn:active {
       transform: scale(0.98);
     }
+
     .rsvp-couple-bottom-img {
-      padding-top: 2.5rem; /* py-10 */
+      padding-top: 2.5rem;
+      /* py-10 */
       padding-bottom: 2.5rem;
       width: 150px;
       height: auto;
       display: block;
     }
+
     .rsvp-thank-you-img {
-      padding-bottom: 2.5rem; /* pb-10 */
+      padding-bottom: 2.5rem;
+      /* pb-10 */
       width: 200px;
       height: auto;
       display: block;
     }
+
     .footer-credit-bar {
       background-color: #000000;
-      padding: 0.5rem 0.75rem; /* py-2 px-3 */
+      padding: 0.5rem 0.75rem;
+      /* py-2 px-3 */
       color: #ffffff;
       display: flex;
       justify-content: space-between;
@@ -1531,37 +1799,22 @@
     }
   </style>
 </head>
+
 <body>
 
   <!-- Audio Element with multiple fallback sources matching components/Audio.tsx -->
-  <audio
-    id="wedding-audio"
-    preload="auto"
-    playsinline
-    webkit-playsinline="true"
-    x-webkit-airplay="allow"
-    style="display: none"
-  >
+  <audio id="wedding-audio" preload="auto" playsinline webkit-playsinline="true" x-webkit-airplay="allow"
+    style="display: none">
     <source src="public/audio/nhac_cuoi.mp3" type="audio/mpeg" />
     <source src="public/audio/nhac_cuoi.mp3" type="audio/mp3" />
     <source src="audio/nhac_cuoi.mp3" type="audio/mpeg" />
   </audio>
 
   <!-- Audio Floating Button - Exact styling & classes from Audio.tsx & globals.css -->
-  <button
-    id="audio-toggle"
-    class="audio-button"
-    aria-label="Play music"
-    type="button"
-  >
+  <button id="audio-toggle" class="audio-button" aria-label="Play music" type="button">
     <div class="audio-btn-inner">
-      <img
-        id="audio-icon"
-        src="public/images/webp/audio.png"
-        alt="Audio control"
-        class="audio-btn-img"
-        loading="eager"
-      />
+      <img id="audio-icon" src="public/images/webp/audio.png" alt="Audio control" class="audio-btn-img"
+        loading="eager" />
       <div id="audio-slash" class="audio-slash-overlay">
         <div class="audio-slash-line"></div>
       </div>
@@ -1580,11 +1833,7 @@
         <span>MY LIFE</span>
       </div>
 
-      <img
-        src="public/images/webp/flower_1.webp"
-        alt="Flower decoration"
-        class="flower-1-img anim from-up"
-      />
+      <img src="public/images/webp/flower_1.webp" alt="Flower decoration" class="flower-1-img anim from-up" />
 
       <div class="envelope-heading anim from-left">
         Wedding Invitation
@@ -1607,11 +1856,8 @@
           <div class="env-letter">
             <div class="env-letter-gradient"></div>
             <div class="env-letter-img-wrap">
-              <img
-                src="public/images/webp/picture_1.webp"
-                alt="Wedding invitation"
-                class="env-letter-img"
-              />
+              <img src="public/images/webp/picture_1.jpg" alt="Wedding invitation" class="env-letter-img"
+                style="object-position: center -16px;" />
             </div>
           </div>
 
@@ -1624,20 +1870,32 @@
           <div class="env-hearts-wrap">
             <div class="env-heart-unit h1">
               <div style="position:relative; width:30px; height:30px;">
-                <div style="position:absolute; left:15px; top:0; width:30px; height:48px; background:#d00000; border-top-left-radius:30px; border-top-right-radius:30px; transform:rotate(-45deg); transform-origin:0 100%;"></div>
-                <div style="position:absolute; left:0; top:0; width:30px; height:48px; background:#d00000; border-top-left-radius:30px; border-top-right-radius:30px; transform:rotate(45deg); transform-origin:100% 100%;"></div>
+                <div
+                  style="position:absolute; left:15px; top:0; width:30px; height:48px; background:#d00000; border-top-left-radius:30px; border-top-right-radius:30px; transform:rotate(-45deg); transform-origin:0 100%;">
+                </div>
+                <div
+                  style="position:absolute; left:0; top:0; width:30px; height:48px; background:#d00000; border-top-left-radius:30px; border-top-right-radius:30px; transform:rotate(45deg); transform-origin:100% 100%;">
+                </div>
               </div>
             </div>
             <div class="env-heart-unit h2">
               <div style="position:relative; width:35px; height:35px;">
-                <div style="position:absolute; left:17px; top:0; width:35px; height:56px; background:#d00000; border-top-left-radius:35px; border-top-right-radius:35px; transform:rotate(-45deg); transform-origin:0 100%;"></div>
-                <div style="position:absolute; left:0; top:0; width:35px; height:56px; background:#d00000; border-top-left-radius:35px; border-top-right-radius:35px; transform:rotate(45deg); transform-origin:100% 100%;"></div>
+                <div
+                  style="position:absolute; left:17px; top:0; width:35px; height:56px; background:#d00000; border-top-left-radius:35px; border-top-right-radius:35px; transform:rotate(-45deg); transform-origin:0 100%;">
+                </div>
+                <div
+                  style="position:absolute; left:0; top:0; width:35px; height:56px; background:#d00000; border-top-left-radius:35px; border-top-right-radius:35px; transform:rotate(45deg); transform-origin:100% 100%;">
+                </div>
               </div>
             </div>
             <div class="env-heart-unit h3">
               <div style="position:relative; width:32px; height:32px;">
-                <div style="position:absolute; left:16px; top:0; width:32px; height:51px; background:#d00000; border-top-left-radius:32px; border-top-right-radius:32px; transform:rotate(-45deg); transform-origin:0 100%;"></div>
-                <div style="position:absolute; left:0; top:0; width:32px; height:51px; background:#d00000; border-top-left-radius:32px; border-top-right-radius:32px; transform:rotate(45deg); transform-origin:100% 100%;"></div>
+                <div
+                  style="position:absolute; left:16px; top:0; width:32px; height:51px; background:#d00000; border-top-left-radius:32px; border-top-right-radius:32px; transform:rotate(-45deg); transform-origin:0 100%;">
+                </div>
+                <div
+                  style="position:absolute; left:0; top:0; width:32px; height:51px; background:#d00000; border-top-left-radius:32px; border-top-right-radius:32px; transform:rotate(45deg); transform-origin:100% 100%;">
+                </div>
               </div>
             </div>
           </div>
@@ -1649,11 +1907,7 @@
         <span class="invite-honor-text">TRÂN TRỌNG KÍNH MỜI</span>
       </div>
 
-      <img
-        src="public/images/webp/flower_2.webp"
-        alt="Flower decoration"
-        class="flower-2-img"
-      />
+      <img src="public/images/webp/flower_2.webp" alt="Flower decoration" class="flower-2-img" />
 
       <span id="invite-family-desc" class="invite-family-desc anim from-right">
         ĐẾN DỰ BUỔI TIỆC CHUNG VUI CÙNG GIA ĐÌNH NHÀ TRAI CHÚNG TÔI VÀO LÚC
@@ -1664,51 +1918,83 @@
          2. SECTION TIME & LOCATION (SectionTime.tsx)
          ============================================================ -->
     <section class="section-time">
+      <!-- TIỆC CHUNG VUI 08:00 -->
+      <div class="ceremony-badge">
+        TIỆC CHUNG VUI
+      </div>
+
       <div id="time-title" class="time-title anim from-right">
-        11 GIỜ 30 | CHỦ NHẬT | 30.11.2025
+        08 GIỜ | CHỦ NHẬT | 29.11.2026
       </div>
       <div class="time-lunar">
-        (Nhằm ngày 11 tháng 10 năm Ất Tỵ)
+        (Nhằm ngày 21 tháng 10 năm Bính Ngọ)
       </div>
 
       <div class="divider-wrap">
-        <svg xmlns="http://www.w3.org/2000/svg" class="divider-icon" width="200px" height="50px" viewBox="0 500 1024 50" version="1.1"><path fill="#999999" d="M371.5072 518.656H39.2192c-3.9936 0-7.2704-3.2768-7.2704-7.2704s3.2768-7.2704 7.2704-7.2704h31.8464c1.536 0 2.7648-1.2288 2.7648-2.7648v-0.9216c0-1.536-1.2288-2.7648-2.7648-2.7648H2.9696v-4.608h68.096c3.9936 0 7.2704 3.2768 7.2704 7.2704v0.9216c0 3.9936-3.2768 7.2704-7.2704 7.2704H39.2192c-1.536 0-2.7648 1.2288-2.7648 2.7648s1.2288 2.7648 2.7648 2.7648h332.288v4.608zM382.1568 518.656H49.8688c-3.9936 0-7.2704-3.2768-7.2704-7.2704s3.2768-7.2704 7.2704-7.2704h31.8464c1.536 0 2.7648-1.2288 2.7648-2.7648v-0.9216c0-1.536-1.2288-2.7648-2.7648-2.7648H13.6192v-4.608h68.096c3.9936 0 7.2704 3.2768 7.2704 7.2704v0.9216c0 3.9936-3.2768 7.2704-7.2704 7.2704H49.8688c-1.536 0-2.7648 1.2288-2.7648 2.7648s1.2288 2.7648 2.7648 2.7648h332.288v4.608zM984.8832 518.656H652.4928v-4.608h332.3904c1.536 0 2.7648-1.2288 2.7648-2.7648s-1.2288-2.7648-2.7648-2.7648h-31.9488c-3.9936 0-7.2704-3.2768-7.2704-7.2704v-0.9216c0-3.9936 3.2768-7.2704 7.2704-7.2704h68.096v4.608h-68.096a2.6624 2.6624 0 0 0-2.6624 2.7648v0.9216c0 1.536 1.2288 2.7648 2.6624 2.7648h31.9488c3.9936 0 7.2704 3.2768 7.2704 7.2704s-3.2768 7.2704-7.2704 7.2704zM974.2336 518.656H641.9456v-4.608h332.288c1.536 0 2.7648-1.2288 2.7648-2.7648s-1.2288-2.7648-2.7648-2.7648h-31.9488c-3.9936 0-7.2704-3.2768-7.2704-7.2704v-0.9216c0-3.9936 3.2768-7.2704 7.2704-7.2704h68.096v4.608h-68.096a2.6624 2.6624 0 0 0-2.6624 2.7648v0.9216c0 1.536 1.2288 2.7648 2.6624 2.7648h31.9488c3.9936 0 7.2704 3.2768 7.2704 7.2704s-3.2768 7.2704-7.2704 7.2704zM408.1664 530.8416h-28.16v-26.624h4.5056v22.1184h19.1488v-17.92h-13.0048v10.752h4.7104v-6.656h4.5056v11.1616h-13.7216v-19.7632h22.016zM441.6512 530.8416h-28.16v-26.624h4.5056v22.1184h19.1488v-17.92h-13.0048v10.752h4.608v-6.656h4.5056v11.1616h-13.6192v-19.7632h22.016zM475.136 530.8416h-28.16v-26.624h4.5056v22.1184h19.1488v-17.92h-13.0048v10.752h4.608v-6.656h4.5056v11.1616h-13.6192v-19.7632h22.016zM508.6208 530.8416h-28.16v-26.624h4.5056v22.1184h19.1488v-17.92h-13.0048v10.752h4.608v-6.656h4.5056v11.1616h-13.6192v-19.7632h22.016zM542.0032 530.8416h-28.16v-26.624h4.5056v22.1184h19.1488v-17.92h-12.9024v10.752h4.608v-6.656h4.5056v11.1616h-13.6192v-19.7632h21.9136zM575.488 530.8416h-28.16v-26.624h4.5056v22.1184h19.1488v-17.92h-13.0048v10.752h4.608v-6.656h4.5056v11.1616h-13.6192v-19.7632h22.016zM608.9728 530.8416h-28.16v-26.624h4.5056v22.1184h19.1488v-17.92h-13.0048v10.752h4.608v-6.656h4.5056v11.1616h-13.6192v-19.7632h22.016zM642.4576 530.8416h-28.16v-26.624h4.5056v22.1184h19.1488v-17.92h-13.0048v10.752h4.608v-6.656h4.5056v11.1616h-13.6192v-19.7632h22.016z" /></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" class="divider-icon" width="200px" height="50px" viewBox="0 500 1024 50"
+          version="1.1">
+          <path fill="#999999"
+            d="M371.5072 518.656H39.2192c-3.9936 0-7.2704-3.2768-7.2704-7.2704s3.2768-7.2704 7.2704-7.2704h31.8464c1.536 0 2.7648-1.2288 2.7648-2.7648v-0.9216c0-1.536-1.2288-2.7648-2.7648-2.7648H2.9696v-4.608h68.096c3.9936 0 7.2704 3.2768 7.2704 7.2704v0.9216c0 3.9936-3.2768 7.2704-7.2704 7.2704H39.2192c-1.536 0-2.7648 1.2288-2.7648 2.7648s1.2288 2.7648 2.7648 2.7648h332.288v4.608zM984.8832 518.656H652.4928v-4.608h332.3904c1.536 0 2.7648-1.2288 2.7648-2.7648s-1.2288-2.7648-2.7648-2.7648h-31.9488c-3.9936 0-7.2704-3.2768-7.2704-7.2704v-0.9216c0-3.9936 3.2768-7.2704 7.2704-7.2704h68.096v4.608h-68.096a2.6624 2.6624 0 0 0-2.6624 2.7648v0.9216c0 1.536 1.2288 2.7648 2.6624 2.7648h31.9488c3.9936 0 7.2704 3.2768 7.2704 7.2704s-3.2768 7.2704-7.2704 7.2704z" />
+        </svg>
       </div>
 
+      <!-- LỄ VU QUY 12:00 -->
+      <div class="ceremony-badge">
+        LỄ VU QUY
+      </div>
+
+      <div class="time-title anim from-right">
+        12 GIỜ | CHỦ NHẬT | 29.11.2026
+      </div>
+      <div class="time-lunar">
+        (Nhằm ngày 21 tháng 10 năm Bính Ngọ)
+      </div>
+
+      <div class="divider-wrap">
+        <svg xmlns="http://www.w3.org/2000/svg" class="divider-icon" width="200px" height="50px" viewBox="0 500 1024 50"
+          version="1.1">
+          <path fill="#999999"
+            d="M371.5072 518.656H39.2192c-3.9936 0-7.2704-3.2768-7.2704-7.2704s3.2768-7.2704 7.2704-7.2704h31.8464c1.536 0 2.7648-1.2288 2.7648-2.7648v-0.9216c0-1.536-1.2288-2.7648-2.7648-2.7648H2.9696v-4.608h68.096c3.9936 0 7.2704 3.2768 7.2704 7.2704v0.9216c0 3.9936-3.2768 7.2704-7.2704 7.2704H39.2192c-1.536 0-2.7648 1.2288-2.7648 2.7648s1.2288 2.7648 2.7648 2.7648h332.288v4.608zM984.8832 518.656H652.4928v-4.608h332.3904c1.536 0 2.7648-1.2288 2.7648-2.7648s-1.2288-2.7648-2.7648-2.7648h-31.9488c-3.9936 0-7.2704-3.2768-7.2704-7.2704v-0.9216c0-3.9936 3.2768-7.2704 7.2704-7.2704h68.096v4.608h-68.096a2.6624 2.6624 0 0 0-2.6624 2.7648v0.9216c0 1.536 1.2288 2.7648 2.6624 2.7648h31.9488c3.9936 0 7.2704 3.2768 7.2704 7.2704s-3.2768 7.2704-7.2704 7.2704z" />
+        </svg>
+      </div>
+
+      <!-- LỄ THÀNH HÔN 13:00 -->
       <div class="ceremony-badge">
         LỄ THÀNH HÔN
       </div>
 
       <div class="time-title anim from-right">
-        11 GIỜ | THỨ 2 | 01.12.2025
+        13 GIỜ | CHỦ NHẬT | 29.11.2026
       </div>
       <div class="time-lunar">
-        (Nhằm ngày 12 tháng 10 năm Ất Tỵ)
+        (Nhằm ngày 21 tháng 10 năm Bính Ngọ)
       </div>
 
       <div class="divider-wrap">
-        <svg xmlns="http://www.w3.org/2000/svg" class="divider-icon" width="200px" height="50px" viewBox="0 500 1024 50" version="1.1"><path fill="#999999" d="M371.5072 518.656H39.2192c-3.9936 0-7.2704-3.2768-7.2704-7.2704s3.2768-7.2704 7.2704-7.2704h31.8464c1.536 0 2.7648-1.2288 2.7648-2.7648v-0.9216c0-1.536-1.2288-2.7648-2.7648-2.7648H2.9696v-4.608h68.096c3.9936 0 7.2704 3.2768 7.2704 7.2704v0.9216c0 3.9936-3.2768 7.2704-7.2704 7.2704H39.2192c-1.536 0-2.7648 1.2288-2.7648 2.7648s1.2288 2.7648 2.7648 2.7648h332.288v4.608zM382.1568 518.656H49.8688c-3.9936 0-7.2704-3.2768-7.2704-7.2704s3.2768-7.2704 7.2704-7.2704h31.8464c1.536 0 2.7648-1.2288 2.7648-2.7648v-0.9216c0-1.536-1.2288-2.7648-2.7648-2.7648H13.6192v-4.608h68.096c3.9936 0 7.2704 3.2768 7.2704 7.2704v0.9216c0 3.9936-3.2768 7.2704-7.2704 7.2704H49.8688c-1.536 0-2.7648 1.2288-2.7648 2.7648s1.2288 2.7648 2.7648 2.7648h332.288v4.608zM984.8832 518.656H652.4928v-4.608h332.3904c1.536 0 2.7648-1.2288 2.7648-2.7648s-1.2288-2.7648-2.7648-2.7648h-31.9488c-3.9936 0-7.2704-3.2768-7.2704-7.2704v-0.9216c0-3.9936 3.2768-7.2704 7.2704-7.2704h68.096v4.608h-68.096a2.6624 2.6624 0 0 0-2.6624 2.7648v0.9216c0 1.536 1.2288 2.7648 2.6624 2.7648h31.9488c3.9936 0 7.2704 3.2768 7.2704 7.2704s-3.2768 7.2704-7.2704 7.2704zM974.2336 518.656H641.9456v-4.608h332.288c1.536 0 2.7648-1.2288 2.7648-2.7648s-1.2288-2.7648-2.7648-2.7648h-31.9488c-3.9936 0-7.2704-3.2768-7.2704-7.2704v-0.9216c0-3.9936 3.2768-7.2704 7.2704-7.2704h68.096v4.608h-68.096a2.6624 2.6624 0 0 0-2.6624 2.7648v0.9216c0 1.536 1.2288 2.7648 2.6624 2.7648h31.9488c3.9936 0 7.2704 3.2768 7.2704 7.2704s-3.2768 7.2704-7.2704 7.2704zM408.1664 530.8416h-28.16v-26.624h4.5056v22.1184h19.1488v-17.92h-13.0048v10.752h4.7104v-6.656h4.5056v11.1616h-13.7216v-19.7632h22.016zM441.6512 530.8416h-28.16v-26.624h4.5056v22.1184h19.1488v-17.92h-13.0048v10.752h4.608v-6.656h4.5056v11.1616h-13.6192v-19.7632h22.016zM475.136 530.8416h-28.16v-26.624h4.5056v22.1184h19.1488v-17.92h-13.0048v10.752h4.608v-6.656h4.5056v11.1616h-13.6192v-19.7632h22.016zM508.6208 530.8416h-28.16v-26.624h4.5056v22.1184h19.1488v-17.92h-13.0048v10.752h4.608v-6.656h4.5056v11.1616h-13.6192v-19.7632h22.016zM542.0032 530.8416h-28.16v-26.624h4.5056v22.1184h19.1488v-17.92h-12.9024v10.752h4.608v-6.656h4.5056v11.1616h-13.6192v-19.7632h21.9136zM575.488 530.8416h-28.16v-26.624h4.5056v22.1184h19.1488v-17.92h-13.0048v10.752h4.608v-6.656h4.5056v11.1616h-13.6192v-19.7632h22.016zM608.9728 530.8416h-28.16v-26.624h4.5056v22.1184h19.1488v-17.92h-13.0048v10.752h4.608v-6.656h4.5056v11.1616h-13.6192v-19.7632h22.016zM642.4576 530.8416h-28.16v-26.624h4.5056v22.1184h19.1488v-17.92h-13.0048v10.752h4.608v-6.656h4.5056v11.1616h-13.6192v-19.7632h22.016z" /></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" class="divider-icon" width="200px" height="50px" viewBox="0 500 1024 50"
+          version="1.1">
+          <path fill="#999999"
+            d="M371.5072 518.656H39.2192c-3.9936 0-7.2704-3.2768-7.2704-7.2704s3.2768-7.2704 7.2704-7.2704h31.8464c1.536 0 2.7648-1.2288 2.7648-2.7648v-0.9216c0-1.536-1.2288-2.7648-2.7648-2.7648H2.9696v-4.608h68.096c3.9936 0 7.2704 3.2768 7.2704 7.2704v0.9216c0 3.9936-3.2768 7.2704-7.2704 7.2704H39.2192c-1.536 0-2.7648 1.2288-2.7648 2.7648s1.2288 2.7648 2.7648 2.7648h332.288v4.608zM984.8832 518.656H652.4928v-4.608h332.3904c1.536 0 2.7648-1.2288 2.7648-2.7648s-1.2288-2.7648-2.7648-2.7648h-31.9488c-3.9936 0-7.2704-3.2768-7.2704-7.2704v-0.9216c0-3.9936 3.2768-7.2704 7.2704-7.2704h68.096v4.608h-68.096a2.6624 2.6624 0 0 0-2.6624 2.7648v0.9216c0 1.536 1.2288 2.7648 2.6624 2.7648h31.9488c3.9936 0 7.2704 3.2768 7.2704 7.2704s-3.2768 7.2704-7.2704 7.2704z" />
+        </svg>
       </div>
 
       <!-- Tư Gia Nhà Trai -->
+
       <div class="location-card anim from-up">
         <div class="location-card-title">
           TƯ GIA NHÀ TRAI
         </div>
         <div class="location-addr">
-          <span>Đ/c cũ: thôn An Phong, xã An Ninh, huyện Bình Lục, tỉnh Hà Nam</span>
-          <span>Đ/c mới: thôn An Phong, xã Bình Giang, tỉnh Ninh Bình</span>
+          <span>Thôn Nam Xuân - Xã Nhân Hà - Tỉnh Ninh Bình</span>
         </div>
         <div class="map-frame-container">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d934.2926336679529!2d106.13540927570087!3d20.499234251938333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjDCsDI5JzU3LjIiTiAxMDbCsDA4JzExLjkiRQ!5e0!3m2!1svi!2s!4v1763836464940!5m2!1svi!2s"
-            allowfullscreen=""
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-          ></iframe>
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6349.277297751481!2d106.1240177!3d20.5231836!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135c395448c57bb%3A0x3210b76bf86f1226!2zQ2jDqCBUaMOhaSBOZ3V5w6puIMSQ4bupYyBUdXnDqm4!5e1!3m2!1svi!2s!4v1792991719789!5m2!1svi!2s"
+            allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
         </div>
-        <a class="map-anchor" href="https://maps.app.goo.gl/wQnzeKK289WHxxL7A" target="_blank" rel="noopener noreferrer">
-          https://maps.app.goo.gl/wQnzeKK289WHxxL7A
+        <a class="map-anchor" href="https://maps.app.goo.gl/2mw2Z8eF8bszgbZX7" target="_blank"
+          rel="noopener noreferrer">
+          https://maps.app.goo.gl/2mw2Z8eF8bszgbZX7
         </a>
       </div>
 
@@ -1718,19 +2004,16 @@
           TƯ GIA NHÀ GÁI
         </div>
         <div class="location-addr">
-          <span>Đ/c cũ: thôn Phúc Tiên, xã Hoằng Quỳ, huyện Hoằng Hóa, tỉnh Thanh Hóa</span>
-          <span>Đ/c mới: thôn Phúc Tiên, xã Hoằng Giang, tỉnh Thanh Hóa</span>
+          <span>Thôn Phú Cốc - Xã Nam Lý - Tỉnh Ninh Bình</span>
         </div>
         <div class="map-frame-container">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d938.0927377313519!2d105.80392826960528!3d19.8665522601356!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTnCsDUxJzU5LjYiTiAxMDXCsDQ4JzE2LjUiRQ!5e0!3m2!1svi!2s!4v1763836369073!5m2!1svi!2s"
-            allowfullscreen=""
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-          ></iframe>
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6349.562483888253!2d106.16323870000001!3d20.5163078!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135e9f811630a0d%3A0xaa89c5a2ed095145!2zUXXhuqd5IHRodeG7kWMgaOG7k25nIGjhuqFuaA!5e1!3m2!1svi!2s!4v1792991813229!5m2!1svi!2s"
+            allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
         </div>
-        <a class="map-anchor" href="https://maps.app.goo.gl/tN1sTEvnD5NBmWbj9" target="_blank" rel="noopener noreferrer">
-          https://maps.app.goo.gl/tN1sTEvnD5NBmWbj9
+        <a class="map-anchor" href="https://maps.app.goo.gl/T3fpQE7gweTfpCQX7" target="_blank"
+          rel="noopener noreferrer">
+          https://maps.app.goo.gl/T3fpQE7gweTfpCQX7
         </a>
       </div>
 
@@ -1754,11 +2037,7 @@
         <span>WEDDING</span>
       </div>
       <div class="quote-img-wrap anim from-up">
-        <img
-          src="public/images/main_picture.jpg"
-          alt="Wedding Quote Image"
-          loading="lazy"
-        />
+        <img src="public/images/main_picture.jpg" alt="Wedding Quote Image" loading="lazy" />
       </div>
       <span class="quote-caption-bottom">
         As the clouds and mist dissipate, I love you and everyone knows it
@@ -1776,47 +2055,38 @@
       </div>
 
       <div class="heart-component-wrap">
-        <svg preserveAspectRatio="none" width="23px" height="23px" version="1.2" baseProfile="tiny" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <path fill="#baa58a" d="M70.7,71.3c-10.6,7.5-19.6,17.9-20.7,22.2c-1.3-4.3-9.4-14.5-20.8-22C17.5,63.8-0.1,56.6,0,37.4c0.2-35,37-42,50-11.9C62.3-3.4,99.8,2.1,100,37.2C100.1,56.4,82.3,63.1,70.7,71.3L70.7,71.3z"></path>
-</svg>
+        <svg preserveAspectRatio="none" width="23px" height="23px" version="1.2" baseProfile="tiny"
+          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+          <path fill="#baa58a"
+            d="M70.7,71.3c-10.6,7.5-19.6,17.9-20.7,22.2c-1.3-4.3-9.4-14.5-20.8-22C17.5,63.8-0.1,56.6,0,37.4c0.2-35,37-42,50-11.9C62.3-3.4,99.8,2.1,100,37.2C100.1,56.4,82.3,63.1,70.7,71.3L70.7,71.3z">
+          </path>
+        </svg>
       </div>
 
       <div class="my-lover-img-wrap anim from-up">
-        <img
-          src="public/images/webp/my_lover.webp"
-          alt="Wedding Quote Image"
-          loading="lazy"
-        />
+        <img src="public/images/webp/my_lover.webp" alt="Wedding Quote Image" loading="lazy" />
       </div>
 
       <div class="couple-actors-row">
         <!-- Groom -->
         <div class="actor-col anim from-left">
           <div>
-            <img
-              src="public/images/webp/groom.webp"
-              alt="Groom Image"
-              loading="lazy"
-            />
+            <img src="public/images/webp/groom.png" alt="Groom Image" loading="lazy" />
           </div>
           <span>|</span>
-          <a href="groom.html">
-            <span>Hà Lợi</span>
+          <a href="?sender=groom">
+            <span>Trương Văn Hoàng</span>
           </a>
         </div>
 
         <!-- Bridal -->
         <div class="actor-col anim from-right">
           <div>
-            <img
-              src="public/images/webp/bridal.webp"
-              alt="Bride Image"
-              loading="lazy"
-            />
+            <img src="public/images/webp/bridal.jpg" alt="Bride Image" loading="lazy" />
           </div>
           <span>|</span>
-          <a href="bridal.html">
-            <span>Trần Hằng</span>
+          <a href="?sender=bridal">
+            <span>Trần Thị Hồng Hạnh</span>
           </a>
         </div>
       </div>
@@ -1834,42 +2104,26 @@
 
       <!-- Album Layout -->
       <div class="album-layout-board">
-        <img
-          src="public/images/webp/album_layout.webp"
-          alt="Wedding Album Layout"
-          class="album-layout-bg"
-        />
+        <img src="public/images/webp/album_layout.webp" alt="Wedding Album Layout" class="album-layout-bg" />
 
         <div class="album-pic-item item-top anim from-up">
-          <img
-            src="public/images/webp/picture_2.webp"
-            alt="Wedding Picture 2"
-            loading="lazy"
-          />
+          <img src="public/images/webp/picture_2.jpg" alt="Wedding Picture 2" loading="lazy" />
           <span class="album-pic-caption">
             I love three things in this world.
           </span>
         </div>
 
         <div class="album-pic-item item-mid anim from-up">
-          <img
-            src="public/images/webp/picture_6.webp"
-            alt="Wedding Picture 6"
-            loading="lazy"
-          />
+          <img src="public/images/webp/picture_5.png" alt="Wedding Picture 6" loading="lazy" />
           <span class="album-pic-caption">
             Sun, moon and you.
           </span>
         </div>
 
         <div class="album-pic-item item-bot anim from-up">
-          <img
-            src="public/images/webp/picture_3.webp"
-            alt="Wedding Picture 3"
-            loading="lazy"
-          />
+          <img src="public/images/webp/picture_3.jpg" alt="Wedding Picture 3" loading="lazy" />
           <span class="album-pic-caption">
-            Sun for morning,moon for night, and you forever.
+            Sun for morning,moon for night, and you forever. ewsew
           </span>
         </div>
       </div>
@@ -1901,7 +2155,7 @@
           </div>
 
           <div id="countdown-target-date" class="countdown-target-date">
-            30 Tháng 11, 2025 – 11:30 AM
+            29 Tháng 11, 2026 – 08:00 AM
           </div>
         </div>
       </div>
@@ -1912,17 +2166,16 @@
          ============================================================ -->
     <section class="section-date">
       <div class="heart-component-wrap">
-        <svg preserveAspectRatio="none" width="23px" height="23px" version="1.2" baseProfile="tiny" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <path fill="#baa58a" d="M70.7,71.3c-10.6,7.5-19.6,17.9-20.7,22.2c-1.3-4.3-9.4-14.5-20.8-22C17.5,63.8-0.1,56.6,0,37.4c0.2-35,37-42,50-11.9C62.3-3.4,99.8,2.1,100,37.2C100.1,56.4,82.3,63.1,70.7,71.3L70.7,71.3z"></path>
-</svg>
+        <svg preserveAspectRatio="none" width="23px" height="23px" version="1.2" baseProfile="tiny"
+          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+          <path fill="#baa58a"
+            d="M70.7,71.3c-10.6,7.5-19.6,17.9-20.7,22.2c-1.3-4.3-9.4-14.5-20.8-22C17.5,63.8-0.1,56.6,0,37.4c0.2-35,37-42,50-11.9C62.3-3.4,99.8,2.1,100,37.2C100.1,56.4,82.3,63.1,70.7,71.3L70.7,71.3z">
+          </path>
+        </svg>
       </div>
 
       <div class="save-the-date-img-wrap anim from-up">
-        <img
-          src="public/images/webp/save_the_date.webp"
-          alt="Save The Date Decoration"
-          loading="lazy"
-        />
+        <img src="public/images/webp/save_the_date.webp" alt="Save The Date Decoration" loading="lazy" />
       </div>
 
       <div class="date-two-lines anim from-right">
@@ -1936,27 +2189,19 @@
          ============================================================ -->
     <section class="section-save-the-date">
       <div>
-        <img
-          src="public/images/webp/picture_card.webp"
-          alt="Save The Date Decoration"
-          class="save-card-deco-img"
-        />
+        <img src="public/images/webp/picture_card.webp" alt="Save The Date Decoration" class="save-card-deco-img" />
       </div>
 
       <!-- Dark gradient overlay -->
       <div class="save-dark-gradient-overlay"></div>
 
       <!-- Main photo -->
-      <img
-        src="public/images/picture_7.jpg"
-        alt="Save The Date Decoration"
-        class="save-main-photo"
-        loading="lazy"
-      />
+      <img src="public/images/webp/picture_7.jpeg" alt="Save The Date Decoration" class="save-main-photo"
+        loading="lazy" />
 
       <div class="save-date-bottom-text">
-        <span>Chủ Nhật, 30/11/2025</span>
-        <span>Âm lịch 11/10 | 11:30 AM và 04:30 PM</span>
+        <span>Chủ Nhật, 29/11/2026</span>
+        <span>Âm lịch 21/10 Bính Ngọ | 08:00 · 12:00 · 13:00</span>
       </div>
 
       <!-- DateBoard Component -->
@@ -1988,11 +2233,7 @@
       </div>
 
       <div class="sweet-full-img-box anim from-up">
-        <img
-          src="public/images/picture_8.jpg"
-          alt="Wedding Quote Image"
-          loading="lazy"
-        />
+        <img src="public/images/webp/picture_8.jpg" alt="Wedding Quote Image" loading="lazy" />
       </div>
     </section>
 
@@ -2017,11 +2258,7 @@
       </div>
 
       <div class="sweet-full-img-box anim from-up">
-        <img
-          src="public/images/webp/picture_5.jpg"
-          alt="Wedding Quote Image"
-          loading="lazy"
-        />
+        <img src="public/images/webp/picture_5.png" alt="Wedding Quote Image" loading="lazy" />
       </div>
     </section>
 
@@ -2030,17 +2267,16 @@
          ============================================================ -->
     <section class="section-rsvp-wrap">
       <div class="heart-component-wrap">
-        <svg preserveAspectRatio="none" width="23px" height="23px" version="1.2" baseProfile="tiny" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <path fill="#baa58a" d="M70.7,71.3c-10.6,7.5-19.6,17.9-20.7,22.2c-1.3-4.3-9.4-14.5-20.8-22C17.5,63.8-0.1,56.6,0,37.4c0.2-35,37-42,50-11.9C62.3-3.4,99.8,2.1,100,37.2C100.1,56.4,82.3,63.1,70.7,71.3L70.7,71.3z"></path>
-</svg>
+        <svg preserveAspectRatio="none" width="23px" height="23px" version="1.2" baseProfile="tiny"
+          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+          <path fill="#baa58a"
+            d="M70.7,71.3c-10.6,7.5-19.6,17.9-20.7,22.2c-1.3-4.3-9.4-14.5-20.8-22C17.5,63.8-0.1,56.6,0,37.4c0.2-35,37-42,50-11.9C62.3-3.4,99.8,2.1,100,37.2C100.1,56.4,82.3,63.1,70.7,71.3L70.7,71.3z">
+          </path>
+        </svg>
       </div>
 
       <div class="rsvp-present-img-box anim from-up">
-        <img
-          src="public/images/webp/present.webp"
-          alt="Present gift"
-          loading="lazy"
-        />
+        <img src="public/images/webp/present.webp" alt="Present gift" loading="lazy" />
       </div>
 
       <div class="rsvp-qr-cards-container">
@@ -2050,16 +2286,12 @@
             <span>Mừng cưới đến chú rể</span>
           </div>
           <div class="rsvp-qr-img-wrapper">
-            <img
-              src="public/images/webp/qr_groom.webp"
-              alt="QR Code Chú rể"
-              loading="lazy"
-            />
+            <img src="public/images/webp/qr_groom.jpg" alt="QR Code Chú rể" loading="lazy" />
           </div>
           <div class="rsvp-qr-info">
-            <p>Tên tài khoản: <span>HA DINH LOI</span></p>
-            <p>Số tài khoản: <span>2206502400</span></p>
-            <p>Chi nhánh: <span>BIDV - CN Thăng Long</span></p>
+            <p>Tên tài khoản: <span>TRUONG VAN HOANG</span></p>
+            <p>Số tài khoản: <span>9868987609</span></p>
+            <p><span>Vietcombank</span></p>
           </div>
         </div>
 
@@ -2069,22 +2301,18 @@
             <span>Mừng cưới đến cô dâu</span>
           </div>
           <div class="rsvp-qr-img-wrapper">
-            <img
-              src="public/images/webp/qr_bridal.webp"
-              alt="QR Code Cô dâu"
-              loading="lazy"
-            />
+            <img src="public/images/webp/qr_bridal.jpg" alt="QR Code Cô dâu" loading="lazy" />
           </div>
           <div class="rsvp-qr-info">
-            <p>Tên tài khoản: <span>TRAN THI HANG</span></p>
-            <p>Số tài khoản: <span>4506110518</span></p>
-            <p>Chi nhánh: <span>BIDV - CN HA DONG PGD AN HUNG</span></p>
+            <p>Tên tài khoản: <span>TRAN THI HONG HANH</span></p>
+            <p>Số tài khoản: <span>8848110980</span></p>
+            <p> <span>BIDV</span></p>
           </div>
         </div>
       </div>
 
       <!-- RSVP Form -->
-      <div class="rsvp-form-container anim from-up">
+      <!-- <div class="rsvp-form-container anim from-up">
         <div class="rsvp-form-card">
           <h2 class="rsvp-form-title">
             Xác nhận tham dự
@@ -2095,14 +2323,8 @@
               <label for="fullName" class="form-field-label">
                 Họ và tên <span class="form-required-star">*</span>
               </label>
-              <input
-                type="text"
-                id="fullName"
-                name="fullName"
-                class="form-text-input"
-                placeholder="Nhập họ và tên của bạn"
-                required
-              />
+              <input type="text" id="fullName" name="fullName" class="form-text-input"
+                placeholder="Nhập họ và tên của bạn" required />
             </div>
 
             <div class="form-field-group">
@@ -2126,28 +2348,18 @@
             </button>
           </form>
         </div>
-      </div>
+      </div> -->
 
-      <img
-        src="public/images/webp/groom_bridal.webp"
-        alt="RSVP Image"
-        class="rsvp-couple-bottom-img"
-        loading="lazy"
-      />
+      <!-- <img src="public/images/webp/groom_bridal.jpg" alt="RSVP Image" class="rsvp-couple-bottom-img" loading="lazy" /> -->
 
-      <img
-        src="public/images/webp/thank_you.webp"
-        alt="RSVP Image"
-        class="rsvp-thank-you-img"
-        loading="lazy"
-      />
+      <img src="public/images/webp/thank_you.webp" alt="RSVP Image" class="rsvp-thank-you-img" loading="lazy" />
 
       <div class="footer-credit-bar">
-        <span>Created with ♥ by Evanloi</span>
+        <span>Created with ♥ by Lowji</span>
         <span>|</span>
-        <span>Chú rể: 0342429911</span>
+        <span>Chú rể: Trương Văn Hoàng</span>
         <span>|</span>
-        <span>Cô dâu: 0395889888</span>
+        <span>Cô dâu: Trần Thị Hồng Hạnh</span>
       </div>
     </section>
 
@@ -2263,7 +2475,7 @@
           if (!isPlaying && isAudioSupported) {
             const p = audio.play();
             if (p !== undefined) {
-              p.then(() => updateAudioUI(true)).catch(() => {});
+              p.then(() => updateAudioUI(true)).catch(() => { });
             }
           }
         }
@@ -2276,13 +2488,13 @@
       });
 
       // Expose playAudioForEnvelope
-      window.playAudioOnEnvelopeOpen = function() {
+      window.playAudioOnEnvelopeOpen = function () {
         if (!isPlaying && isAudioSupported) {
           userInteracted = true;
           audio.loop = true;
           const p = audio.play();
           if (p !== undefined) {
-            p.then(() => updateAudioUI(true)).catch(() => {});
+            p.then(() => updateAudioUI(true)).catch(() => { });
           }
         }
       };
@@ -2311,6 +2523,12 @@
 
       envelopeBox.addEventListener('click', toggleEnvelope);
       if (tapHintBtn) tapHintBtn.addEventListener('click', toggleEnvelope);
+
+      // Support background-position if set inline on <img>
+      const envImg = envelopeBox.querySelector('.env-letter-img');
+      if (envImg && envImg.tagName === 'IMG' && envImg.style.backgroundPosition) {
+        envImg.style.objectPosition = envImg.style.backgroundPosition;
+      }
     })();
 
     // ============================================================
@@ -2337,8 +2555,9 @@
     // ============================================================
     (function initCountdown() {
       // Determine target time based on sender
+      // groom: tiệc nhà trai 08:00 | bridal: tiệc nhà gái 08:00 (same time, different venues)
       var _sender = window.__WEDDING_SENDER__ || 'groom';
-      var _timeStr = (_sender === 'bridal') ? '2025-11-30T11:00:00+07:00' : '2025-11-30T11:30:00+07:00';
+      var _timeStr = (_sender === 'bridal') ? '2026-11-29T08:00:00+07:00' : '2026-11-29T08:00:00+07:00';
       const targetTime = new Date(_timeStr).getTime();
       const elDays = document.getElementById('cd-days');
       const elHours = document.getElementById('cd-hours');
@@ -2377,62 +2596,41 @@
       const calGrid = document.getElementById('dateboard-grid');
       if (!calGrid) return;
 
-      // 5 empty slots for Nov 1-2 starting on column 6
-      for (let i = 0; i < 5; i++) {
-        const emptyCell = document.createElement('div');
-        emptyCell.className = 'date-cell empty';
-        calGrid.appendChild(emptyCell);
-      }
-
-      // Days 1 through 29
-      for (let day = 1; day <= 29; day++) {
+      // Nov 1, 2026 = Sunday → 0 empty slots needed
+      // Days 1 through 28
+      for (let day = 1; day <= 28; day++) {
         const cell = document.createElement('div');
         cell.className = 'date-cell';
         cell.innerHTML = `<div class="date-cell-inner"><span>${day}</span></div>`;
         calGrid.appendChild(cell);
       }
 
-      // Nov 30 (Tiệc Cưới)
-      const cell30 = document.createElement('div');
-      cell30.className = 'date-cell special-reception';
-      cell30.innerHTML = `
+      // Nov 29 (Tiệc + Vu Quy + Lễ Thành Hôn - all events on same day)
+      const cell29 = document.createElement('div');
+      cell29.className = 'date-cell special-ceremony';
+      cell29.innerHTML = `
         <div class="date-cell-inner">
           <div class="date-group-box">
-            <div class="date-num-badge">30</div>
-            <svg class="date-heart-svg gold" viewBox="0 0 24 22">
-              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-            </svg>
-            <div class="date-tooltip">
-              <div class="date-tooltip-inner gold">
-                Tiệc Cưới
-                <div class="date-tooltip-arrow gold"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      `;
-      calGrid.appendChild(cell30);
-
-      // Dec 1 (Lễ thành hôn)
-      const cellDec1 = document.createElement('div');
-      cellDec1.className = 'date-cell special-ceremony';
-      cellDec1.innerHTML = `
-        <div class="date-cell-inner">
-          <div class="date-group-box">
-            <div class="date-num-badge">1</div>
+            <div class="date-num-badge">29</div>
             <svg class="date-heart-svg red" viewBox="0 0 24 22">
               <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
             </svg>
             <div class="date-tooltip">
               <div class="date-tooltip-inner red">
-                Lễ thành hôn
+                Ngày Cưới
                 <div class="date-tooltip-arrow red"></div>
               </div>
             </div>
           </div>
         </div>
       `;
-      calGrid.appendChild(cellDec1);
+      calGrid.appendChild(cell29);
+
+      // Days 30
+      const cell30 = document.createElement('div');
+      cell30.className = 'date-cell';
+      cell30.innerHTML = `<div class="date-cell-inner"><span>30</span></div>`;
+      calGrid.appendChild(cell30);
 
       // Fill remaining 5 slots to complete grid
       for (let i = 0; i < 5; i++) {
@@ -2525,16 +2723,13 @@
 
         var timeEl = document.getElementById('time-title');
         if (timeEl) {
-          timeEl.textContent = isBridal
-            ? '11 GIỜ | CHỦ NHẬT | 30.11.2025'
-            : '11 GIỜ 30 | CHỦ NHẬT | 30.11.2025';
+          // bridal: 08:00 tiệc nhà gái | groom: 08:00 tiệc nhà trai (same time)
+          timeEl.textContent = '08 GIỜ | CHỦ NHẬT | 29.11.2026';
         }
 
         var cdDateEl = document.getElementById('countdown-target-date');
         if (cdDateEl) {
-          cdDateEl.textContent = isBridal
-            ? '30 Tháng 11, 2025 – 11:00 AM'
-            : '30 Tháng 11, 2025 – 11:30 AM';
+          cdDateEl.textContent = '29 Tháng 11, 2026 – 08:00 AM';
         }
       }
 
@@ -2547,4 +2742,5 @@
   </script>
 
 </body>
+
 </html>

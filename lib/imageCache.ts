@@ -123,7 +123,7 @@ export const ALL_WEDDING_IMAGES = [
   // Critical images - load ngay
   "/images/webp/my_lover.webp",
   "/images/webp/groom.webp",
-  "/images/webp/bridal.webp",
+  "/images/webp/bridal.jpg",
 
   // Secondary images - load sau
   "/images/webp/album_layout.webp",

@@ -34,7 +34,7 @@ const SectionSaveTheDate = () => {
             {/* <div className="absolute inset-0 bg-gray-900/50"></div> */}
             {/* <div variants={imageAnimation}> */}
             <Image
-                src="/images/picture_7.jpg"
+                src="/images/webp/picture_7.jpeg"
                 alt="Save The Date Decoration"
                 width={360}
                 height={503}

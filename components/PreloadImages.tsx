@@ -26,8 +26,8 @@ const PreloadImages: React.FC<PreloadImagesProps> = ({ images }) => {
 // Danh sách ảnh cần preload (chỉ ảnh quan trọng)
 export const CRITICAL_IMAGES = [
   '/images/webp/my_lover.webp',
-  '/images/webp/groom.webp', 
-  '/images/webp/bridal.webp'
+  '/images/webp/groom.webp',
+  '/images/webp/bridal.jpg'
 ];
 
 export default PreloadImages;

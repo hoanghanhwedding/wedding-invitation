@@ -104,7 +104,7 @@ const SectionRsvp = () => {
                     </motion.div>
                     <div className="relative w-48 h-48 mb-4">
                         <Image
-                            src="/images/webp/qr_bridal.webp"
+                            src="/images/webp/qr_bridal.jpg"
                             alt="QR Code Cô dâu"
                             fill
                             priority
@@ -200,7 +200,7 @@ const SectionRsvp = () => {
                     </form>
                 </div>
             </div>
-            <Image src="/images/webp/groom_bridal.webp" alt="RSVP Image" width={150} height={350} className="py-10" />
+            <Image src="/images/webp/groom_bridal.jpg" alt="RSVP Image" width={150} height={350} className="py-10" />
             <Image src="/images/webp/thank_you.webp" alt="RSVP Image" width={200} height={350} className="pb-10" />
             <div className="bg-black py-2 px-3 text-white flex justify-between w-full font-mallong">
                 <span>Created with ♥ by Evanloi</span>
