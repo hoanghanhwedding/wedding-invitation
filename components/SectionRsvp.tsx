@@ -12,6 +12,19 @@ const SectionRsvp = () => {
         fullName: '',
         attendance: ''
     });
+    const [sender, setSender] = useState<string>('');
+
+    React.useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const params = new URLSearchParams(window.location.search);
+            setSender((params.get('sender') || '').toLowerCase());
+        }
+    }, []);
+
+    const isGroom = sender === 'groom';
+    const isBridal = sender === 'bridal' || sender === 'bride';
+    const showGroom = isGroom || (!isGroom && !isBridal);
+    const showBridal = isBridal || (!isGroom && !isBridal);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -71,52 +84,56 @@ const SectionRsvp = () => {
             </div>
             <div className="w-full max-w-md space-y-6 mt-8">
                 {/* Block 1 - Chú rể */}
-                <div className="border-2 w-[350px] h-[350px] mx-auto border-gray-300 rounded-lg p-6 flex flex-col items-center bg-white">
-                    <motion.div
-                        className="h-auto w-full min-w-[20px] flex flex-col text-black text-[18.848px] font-medium text-center leading-normal tracking-normal normal-case no-underline not-italic pointer-events-none overflow-hidden break-words font-quicksand pb-2 [text-shadow:0_0_2px_rgba(0,0,0,0)]"
-                        variants={fadeInRight}
-                    >
-                        <span>Mừng cưới đến chú rể</span>
-                    </motion.div>
-                    <div className="relative w-48 h-48 mb-4">
-                        <Image
-                            src="/images/webp/qr_groom.webp"
-                            alt="QR Code Chú rể"
-                            fill
-                            priority
-                            className="object-contain"
-                        />
+                {showGroom && (
+                    <div className="border-2 w-[350px] h-[350px] mx-auto border-gray-300 rounded-lg p-6 flex flex-col items-center bg-white">
+                        <motion.div
+                            className="h-auto w-full min-w-[20px] flex flex-col text-black text-[18.848px] font-medium text-center leading-normal tracking-normal normal-case no-underline not-italic pointer-events-none overflow-hidden break-words font-quicksand pb-2 [text-shadow:0_0_2px_rgba(0,0,0,0)]"
+                            variants={fadeInRight}
+                        >
+                            <span>Mừng cưới đến chú rể</span>
+                        </motion.div>
+                        <div className="relative w-48 h-48 mb-4">
+                            <Image
+                                src="/images/webp/qr_groom.jpg"
+                                alt="QR Code Chú rể"
+                                fill
+                                priority
+                                className="object-contain"
+                            />
+                        </div>
+                        <div className="text-center space-y-2">
+                            <p className=" text-black text-[12.848px] font-medium text-center leading-normal tracking-normal normal-case no-underline not-italic pointer-events-none overflow-hidden break-words font-quicksand [text-shadow:0_0_2px_rgba(0,0,0,0)]">Tên tài khoản: <span className="text-black font-semibold">TRUONG VAN HOANG</span></p>
+                            <p className=" text-black text-[12.848px] font-medium text-center leading-normal tracking-normal normal-case no-underline not-italic pointer-events-none overflow-hidden break-words font-quicksand [text-shadow:0_0_2px_rgba(0,0,0,0)]">Số tài khoản: <span className="text-black font-semibold">9868987609</span></p>
+                            <p className=" text-black text-[12.848px] font-medium text-center leading-normal tracking-normal normal-case no-underline not-italic pointer-events-none overflow-hidden break-words font-quicksand [text-shadow:0_0_2px_rgba(0,0,0,0)]">Ngân hàng: <span className="text-black font-semibold">Vietcombank</span></p>
+                        </div>
                     </div>
-                    <div className="text-center space-y-2">
-                        <p className=" text-black text-[12.848px] font-medium text-center leading-normal tracking-normal normal-case no-underline not-italic pointer-events-none overflow-hidden break-words font-quicksand [text-shadow:0_0_2px_rgba(0,0,0,0)]">Tên tài khoản: <span className=" text-black text-[12.848px] font-medium text-center leading-normal tracking-normal normal-case no-underline not-italic pointer-events-none overflow-hidden break-words font-quicksand [text-shadow:0_0_2px_rgba(0,0,0,0)]">HA DINH LOI</span></p>
-                        <p className=" text-black text-[12.848px] font-medium text-center leading-normal tracking-normal normal-case no-underline not-italic pointer-events-none overflow-hidden break-words font-quicksand [text-shadow:0_0_2px_rgba(0,0,0,0)]">Số tài khoản: <span className=" text-black text-[12.848px] font-medium text-center leading-normal tracking-normal normal-case no-underline not-italic pointer-events-none overflow-hidden break-words font-quicksand [text-shadow:0_0_2px_rgba(0,0,0,0)]">2206502400</span></p>
-                        <p className=" text-black text-[12.848px] font-medium text-center leading-normal tracking-normal normal-case no-underline not-italic pointer-events-none overflow-hidden break-words font-quicksand [text-shadow:0_0_2px_rgba(0,0,0,0)]">Chi nhánh: <span className=" text-black text-[12.848px] font-medium text-center leading-normal tracking-normal normal-case no-underline not-italic pointer-events-none overflow-hidden break-words font-quicksand [text-shadow:0_0_2px_rgba(0,0,0,0)]">BIDV - CN Thăng Long</span></p>
-                    </div>
-                </div>
+                )}
 
                 {/* Block 2 - Cô dâu */}
-                <div className="border-2 w-[350px] h-[350px] mx-auto border-gray-300 rounded-lg p-6 flex flex-col items-center bg-white">
-                    <motion.div
-                        className="h-auto w-full min-w-[20px] pb-2 flex flex-col text-black text-[18.848px] font-medium text-center leading-normal tracking-normal normal-case no-underline not-italic pointer-events-none overflow-hidden break-words font-quicksand [text-shadow:0_0_2px_rgba(0,0,0,0)]"
-                        variants={fadeInRight}
-                    >
-                        <span>Mừng cưới đến cô dâu</span>
-                    </motion.div>
-                    <div className="relative w-48 h-48 mb-4">
-                        <Image
-                            src="/images/webp/qr_bridal.jpg"
-                            alt="QR Code Cô dâu"
-                            fill
-                            priority
-                            className="object-contain"
-                        />
+                {showBridal && (
+                    <div className="border-2 w-[350px] h-[350px] mx-auto border-gray-300 rounded-lg p-6 flex flex-col items-center bg-white">
+                        <motion.div
+                            className="h-auto w-full min-w-[20px] pb-2 flex flex-col text-black text-[18.848px] font-medium text-center leading-normal tracking-normal normal-case no-underline not-italic pointer-events-none overflow-hidden break-words font-quicksand [text-shadow:0_0_2px_rgba(0,0,0,0)]"
+                            variants={fadeInRight}
+                        >
+                            <span>Mừng cưới đến cô dâu</span>
+                        </motion.div>
+                        <div className="relative w-48 h-48 mb-4">
+                            <Image
+                                src="/images/webp/qr_bridal.jpg"
+                                alt="QR Code Cô dâu"
+                                fill
+                                priority
+                                className="object-contain"
+                            />
+                        </div>
+                        <div className="text-center space-y-2">
+                            <p className=" text-black text-[12.848px] font-medium text-center leading-normal tracking-normal normal-case no-underline not-italic pointer-events-none overflow-hidden break-words font-quicksand [text-shadow:0_0_2px_rgba(0,0,0,0)]">Tên tài khoản: <span className="text-black font-semibold">TRAN THI HONG HANH</span></p>
+                            <p className=" text-black text-[12.848px] font-medium text-center leading-normal tracking-normal normal-case no-underline not-italic pointer-events-none overflow-hidden break-words font-quicksand [text-shadow:0_0_2px_rgba(0,0,0,0)]">Số tài khoản: <span className="text-black font-semibold">8848110980</span></p>
+                            <p className=" text-black text-[12.848px] font-medium text-center leading-normal tracking-normal normal-case no-underline not-italic pointer-events-none overflow-hidden break-words font-quicksand [text-shadow:0_0_2px_rgba(0,0,0,0)]">Ngân hàng: <span className="text-black font-semibold">BIDV</span></p>
+                        </div>
                     </div>
-                    <div className="text-center space-y-2">
-                        <p className=" text-black text-[12.848px] font-medium text-center leading-normal tracking-normal normal-case no-underline not-italic pointer-events-none overflow-hidden break-words font-quicksand [text-shadow:0_0_2px_rgba(0,0,0,0)]">Tên tài khoản: <span className=" text-black text-[12.848px] font-medium text-center leading-normal tracking-normal normal-case no-underline not-italic pointer-events-none overflow-hidden break-words font-quicksand [text-shadow:0_0_2px_rgba(0,0,0,0)]">TRAN THI HANG</span></p>
-                        <p className=" text-black text-[12.848px] font-medium text-center leading-normal tracking-normal normal-case no-underline not-italic pointer-events-none overflow-hidden break-words font-quicksand [text-shadow:0_0_2px_rgba(0,0,0,0)]">Số tài khoản: <span className=" text-black text-[12.848px] font-medium text-center leading-normal tracking-normal normal-case no-underline not-italic pointer-events-none overflow-hidden break-words font-quicksand [text-shadow:0_0_2px_rgba(0,0,0,0)]">4506110518</span></p>
-                        <p className=" text-black text-[12.848px] font-medium text-center leading-normal tracking-normal normal-case no-underline not-italic pointer-events-none overflow-hidden break-words font-quicksand [text-shadow:0_0_2px_rgba(0,0,0,0)]">Chi nhánh: <span className=" text-black text-[12.848px] font-medium text-center leading-normal tracking-normal normal-case no-underline not-italic pointer-events-none overflow-hidden break-words font-quicksand [text-shadow:0_0_2px_rgba(0,0,0,0)]">BIDV - CN HA DONG PGD AN HUNG</span></p>
-                    </div>
-                </div>
+                )}
             </div>
             <div className="w-[350px] height-[350px] max-w-md my-10">
                 <div className="border-2 border-gray-300 rounded-lg p-8 bg-white shadow-lg">

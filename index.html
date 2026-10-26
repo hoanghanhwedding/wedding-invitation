@@ -7,9 +7,15 @@
   <script>
     (function () {
       var params = new URLSearchParams(window.location.search);
-      var sender = (params.get('sender') || 'groom').toLowerCase();
-      // Store so the rest of the page can reference it
+      var sender = (params.get('sender') || '').toLowerCase();
       window.__WEDDING_SENDER__ = sender;
+      if (sender === 'groom') {
+        document.documentElement.classList.add('sender-groom');
+      } else if (sender === 'bridal' || sender === 'bride') {
+        document.documentElement.classList.add('sender-bridal');
+      } else {
+        document.documentElement.classList.add('sender-both');
+      }
     })();
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -1613,6 +1619,15 @@
       background-color: #ffffff;
     }
 
+    /* Sender-based QR Code Visibility */
+    .sender-groom #qr-block-bridal {
+      display: none !important;
+    }
+
+    .sender-bridal #qr-block-groom {
+      display: none !important;
+    }
+
     .rsvp-qr-block-title {
       height: auto;
       width: 100%;
@@ -2299,7 +2314,7 @@
 
       <div class="rsvp-qr-cards-container">
         <!-- Chú rể -->
-        <div class="rsvp-qr-block anim from-up">
+        <div class="rsvp-qr-block anim from-up" id="qr-block-groom">
           <div class="rsvp-qr-block-title">
             <span>Mừng cưới đến chú rể</span>
           </div>
@@ -2314,7 +2329,7 @@
         </div>
 
         <!-- Cô dâu -->
-        <div class="rsvp-qr-block anim from-up">
+        <div class="rsvp-qr-block anim from-up" id="qr-block-bridal">
           <div class="rsvp-qr-block-title">
             <span>Mừng cưới đến cô dâu</span>
           </div>
@@ -2721,27 +2736,31 @@
     // SENDER-SPECIFIC CUSTOMIZATION
     // ============================================================
     (function applySenderTheme() {
-      var sender = window.__WEDDING_SENDER__ || 'groom';
-      var isBridal = sender === 'bridal';
+      var sender = window.__WEDDING_SENDER__ || '';
+      var isBridal = sender === 'bridal' || sender === 'bride';
+      var isGroom = sender === 'groom';
 
       // 1. Background tint via CSS custom property on :root
-      document.documentElement.style.setProperty(
-        '--bg-tint',
-        isBridal ? '#fdf2f8' : '#eff6ff'
-      );
+      var tint = '#ffffff';
+      if (isBridal) tint = '#fdf2f8';
+      else if (isGroom) tint = '#eff6ff';
+      document.documentElement.style.setProperty('--bg-tint', tint);
 
-      // 2. Text content — apply after DOM is ready
-      function applyText() {
+      // 2. Text content & QR visibility — apply after DOM is ready
+      function applyCustomizations() {
         var familyEl = document.getElementById('invite-family-desc');
         if (familyEl) {
-          familyEl.textContent = isBridal
-            ? 'ĐẾN DỰ BUỔI TIỆC CHUNG VUI CÙNG GIA ĐÌNH NHÀ GÁI CHÚNG TÔI VÀO LÚC'
-            : 'ĐẾN DỰ BUỔI TIỆC CHUNG VUI CÙNG GIA ĐÌNH NHÀ TRAI CHÚNG TÔI VÀO LÚC';
+          if (isBridal) {
+            familyEl.textContent = 'ĐẾN DỰ BUỔI TIỆC CHUNG VUI CÙNG GIA ĐÌNH NHÀ GÁI CHÚNG TÔI VÀO LÚC';
+          } else if (isGroom) {
+            familyEl.textContent = 'ĐẾN DỰ BUỔI TIỆC CHUNG VUI CÙNG GIA ĐÌNH NHÀ TRAI CHÚNG TÔI VÀO LÚC';
+          } else {
+            familyEl.textContent = 'ĐẾN DỰ BUỔI TIỆC CHUNG VUI CÙNG HAI GIA ĐÌNH CHÚNG TÔI VÀO LÚC';
+          }
         }
 
         var timeEl = document.getElementById('time-title');
         if (timeEl) {
-          // bridal: 08:00 tiệc nhà gái | groom: 08:00 tiệc nhà trai (same time)
           timeEl.textContent = '08 GIỜ | CHỦ NHẬT | 29.11.2026';
         }
 
@@ -2749,12 +2768,31 @@
         if (cdDateEl) {
           cdDateEl.textContent = '29 Tháng 11, 2026 – 08:00 AM';
         }
+
+        // 3. QR code visibility:
+        // if ?sender=groom -> show qr groom only
+        // if ?sender=bridal -> show qr bridal only
+        // else -> show both
+        var qrGroom = document.getElementById('qr-block-groom');
+        var qrBridal = document.getElementById('qr-block-bridal');
+        if (qrGroom && qrBridal) {
+          if (isGroom) {
+            qrGroom.style.display = 'flex';
+            qrBridal.style.display = 'none';
+          } else if (isBridal) {
+            qrGroom.style.display = 'none';
+            qrBridal.style.display = 'flex';
+          } else {
+            qrGroom.style.display = 'flex';
+            qrBridal.style.display = 'flex';
+          }
+        }
       }
 
       if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', applyText);
+        document.addEventListener('DOMContentLoaded', applyCustomizations);
       } else {
-        applyText();
+        applyCustomizations();
       }
     })();
   </script>
