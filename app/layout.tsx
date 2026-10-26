@@ -164,41 +164,39 @@ const signora = localFont({
 })
 
 export const metadata: Metadata = {
-  title: 'Loi & Hang Wedding - A Love Story Begins',
-  description: 'Join us as we celebrate the union of Loi and Hang. Discover our love story, wedding details, and share your wishes in our guestbook.',
-  keywords: ['wedding', 'Loi Hang wedding', 'wedding invitation', 'wedding ceremony', 'wedding reception', 'love story'],
-  authors: [{ name: 'Loi & Hang' }],
-  creator: 'Loi & Hang',
-  publisher: 'Loi & Hang Wedding',
+  title: 'Hoàng & Hạnh Wedding | 29.11.2026',
+  description: 'Thiệp cưới online - Trân trọng kính mời quý khách đến dự lễ thành hôn của Trương Văn Hoàng & Trần Thị Hồng Hạnh vào ngày 29.11.2026.',
+  keywords: ['wedding', 'Hoang Hanh wedding', 'thiep cuoi', 'le thanh hon', 'Truong Van Hoang', 'Tran Thi Hong Hanh'],
+  authors: [{ name: 'Trương Văn Hoàng & Trần Thị Hồng Hạnh' }],
+  creator: 'Trương Văn Hoàng & Trần Thị Hồng Hạnh',
+  publisher: 'Hoàng & Hạnh Wedding',
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://loihangwedding.io.vn'),
   alternates: {
     canonical: '/',
   },
   openGraph: {
-    title: 'Loi & Hang Wedding - A Love Story Begins',
-    description: 'Join us as we celebrate the union of Loi and Hang. Save the date for our special day!',
-    url: 'https://loihangwedding.io.vn',
-    siteName: 'Loi & Hang Wedding',
+    title: 'Hoàng & Hạnh Wedding | 29.11.2026',
+    description: 'Thiệp cưới online - Trân trọng kính mời quý khách đến dự lễ thành hôn của Trương Văn Hoàng & Trần Thị Hồng Hạnh vào ngày 29.11.2026.',
+    siteName: 'Hoàng & Hạnh Wedding',
     images: [
       {
         url: '/images/main_picture.jpg',
         width: 1200,
         height: 630,
-        alt: 'Loi & Hang Wedding',
+        alt: 'Hoàng & Hạnh Wedding',
       },
     ],
-    locale: 'en_US',
+    locale: 'vi_VN',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Loi & Hang Wedding - A Love Story Begins',
-    description: 'Join us as we celebrate the union of Loi and Hang.',
+    title: 'Hoàng & Hạnh Wedding | 29.11.2026',
+    description: 'Thiệp cưới online - Trân trọng kính mời quý khách đến dự lễ thành hôn của Trương Văn Hoàng & Trần Thị Hồng Hạnh vào ngày 29.11.2026.',
     images: ['/images/main_picture.jpg'],
   },
   robots: {
